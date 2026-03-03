@@ -66,9 +66,19 @@ the perpetrator is caught
 
 ## Assets needed
 
+Characters:
 - Sven
 - Rose : red hair, with visor.
 - Sudri: old man with unkempt beard
+- Clara
+- Wang
+
+Location:
+- Diver guild lobby
+- Asylum entrance
+- Asylum mesh
+
+
 
 ## Details
 
@@ -101,8 +111,69 @@ Sven: You're welcome Sudri.
 
 Rose: Now, Sven, you need to write the report.
 
-Sven: *groan* sure.
+Sven: *(uuuugh paperwork)* sure.
 
-He moved to a chair nearby, sit then checked on his recording on his suit
+He moved to a chair nearby, sat and then checked on his recording on his suit.
 
-Sven: 
+Sven: *"Now, turn on report auto-generation wizard and hope it does not hallucinate"*
+
+30 minutes later
+
+Sven: *It's not finished yet?. I'd rahter work on it myself*
+
+Rose approached sven with 2 peoples. The first one was a young girl in her early twenty, and the second one was a man in his late twenty. 
+
+Rose: Sven!!.
+
+Sven: Yes. 
+
+*Jingle*
+
+*The report is finished* 
+
+Sven: *Thank God*. Something happened?
+
+Rose: We have new clients for you.
+
+The man extended his hand
+
+Wang: Nice to meet you, Mr. Sven. My name is Wang, And hers is Clara. You might have heard her online name, Diving Diva. 
+
+Sven: Sorry, I don't watch livestream so I don't know much about this field. What's your request?
+
+Wang: We would like to get guide for mesh diving on the abandoned old marduk asylum.
+
+Wang: And based on regulation, we need at least 1 A-rank Stalker on diving team to get permission.
+
+Sven: I have mesh diving in that area few times in the past, there is zero reason to go there unless you're looking for something like missing pets.
+
+Wang: Not even Mesh biota?
+
+Sven: You can meet chimeracat sometimes. Hunting smaller critters. And bladewing bats occasionally stopped there during migration. 
+
+Clara: Then why does it demands A-rank stalker?
+
+Sven: The dangers there are more due to quickly shifting environmental hazards. That's the reason you need a Rank-A stalker to traverse it. You'll need someone who can cast a high-level scanner spell.
+
+Sven: Do you still want to dive there? 
+
+Both of them looked at each other. Finally, after few minutes of silence, Clara spoke.
+
+Clara: I believe the history of the asylum itself is worthy enough for filming location.
+
+Sven:Alright this settled it then. When do you want to dive?
+
+Clara: 2 Days from now, at 9 AM.
+
+Rose: I'll ensure he can work that day.
+
+Rose: Also, Sven.
+
+Despite using gentle voice, rose gave Sven a stern look.
+
+Rose: I haven't receive your report for your earlier mission.
+
+Sven: I will.
+
+2 Days later
+
