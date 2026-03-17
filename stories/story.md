@@ -70,17 +70,26 @@ Characters:
 - Sven
 - Rose : red hair, with visor.
 - Sudri: old man with unkempt beard
-- Clara
-- Wang
+- Clara1: normal bob-haired girl 
+- Clara2: wear a mesh diving suit, with 
+- Wang: Wear cyber helmet-like device
 
 Location:
 - Diver guild lobby
 - Asylum entrance
 - Asylum mesh
 
+BGM:
+ACT 1
+- something cozy (Jazz2 on reference folder)
+- something a bit noire (Jazz3 on reference folder)
+
 
 
 ## Details
+
+### ACT 1
+
 
 the Mesh diver's guild lobby was not as full at the evening as it was in the morning. The divers left were finishing their paperwork after clearing their missions.
 
@@ -175,5 +184,23 @@ Rose: I haven't receive your report for your earlier mission.
 
 Sven: I will.
 
-2 Days later
+### ACT 2
+Two days later at the asylum.
 
+Wang: Is the relay station ready?
+
+Staff1: It's online.
+
+Wang: I'll handle the camera. *turn on camera on his helmet* You ready Clara?
+
+Clara: *Gives thumbs-up*
+
+Wang: We will live in 3, 2, *Create a one sign with his hand, then *
+
+Clara: Hi everyone!!! This is your Diving Diva. Now we will dive to mesh on old Marduk asylum.
+
+Clara: Coming with us as our guide is Mr. Sven.
+
+Sven: *wave hand awkwardly at camera* Greetings
+
+Clara: Now without further ado, how 
