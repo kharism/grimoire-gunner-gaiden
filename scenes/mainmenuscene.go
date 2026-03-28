@@ -2,6 +2,7 @@ package scene
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -24,6 +25,26 @@ var menus = []string{
 	"Options",
 	"Exit",
 }
+var menusFunc = []func(){
+	StartGame,
+	Story,
+	Options,
+	Exit,
+}
+
+func StartGame() {
+
+}
+func Story() {
+
+}
+func Options() {
+	MainMenuInstance.sm.ProcessTrigger(TriggerToOption)
+}
+func Exit() {
+	os.Exit(0)
+}
+
 var MainMenuInstance = &MainMenuScene{}
 
 func (r *MainMenuScene) Update() error {
@@ -47,6 +68,9 @@ func (r *MainMenuScene) Update() error {
 			r.selectedMenu += 1
 		}
 		r.musicPlayer.QueueSFX(assets.MenuMove, assets.TypeOgg)
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
+		menusFunc[r.selectedMenu]()
 	}
 	return nil
 }
@@ -72,6 +96,8 @@ func (r *MainMenuScene) Draw(screen *ebiten.Image) {
 	}
 }
 func (r *MainMenuScene) Load(state *SceneData, manager stagehand.SceneController[*SceneData]) {
+	r.sm = manager.(*stagehand.SceneDirector[*SceneData]) // This type assertion is important
+	r.data = state
 	if r.musicPlayer == nil {
 		var err error
 		r.musicPlayer, err = assets.NewAudioPlayer(assets.Menumusic, assets.TypeOgg, state.BGMVolume, state.SfxVolume)
@@ -88,6 +114,8 @@ func (s *MainMenuScene) Layout(outsideWidth, outsideHeight int) (screenWidth, sc
 	return 640, 360
 }
 func (s *MainMenuScene) Unload() *SceneData {
-
+	s.loopMusic = false
+	s.musicPlayer.AudioPlayer().Rewind()
+	s.musicPlayer.AudioPlayer().Pause()
 	return s.data
 }

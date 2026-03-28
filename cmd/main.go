@@ -49,7 +49,14 @@ func main() {
 	// TODO: read config off permanent storage
 	state.BGMVolume = 128
 	state.SfxVolume = 64
-	ruleSet := map[stagehand.Scene[*scene.SceneData]][]stagehand.Directive[*scene.SceneData]{}
+	ruleSet := map[stagehand.Scene[*scene.SceneData]][]stagehand.Directive[*scene.SceneData]{
+		scene.MainMenuInstance: {
+			stagehand.Directive[*scene.SceneData]{Dest: scene.OptionSceneInstance, Trigger: scene.TriggerToOption},
+		},
+		scene.OptionSceneInstance: {
+			stagehand.Directive[*scene.SceneData]{Dest: scene.MainMenuInstance, Trigger: scene.TriggerToMain},
+		},
+	}
 	manager := stagehand.NewSceneDirector[*scene.SceneData](scene.MainMenuInstance, state, ruleSet)
 	if err := ebiten.RunGame(manager); err != nil {
 		log.Fatal(err)

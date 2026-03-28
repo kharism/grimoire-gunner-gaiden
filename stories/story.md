@@ -203,4 +203,21 @@ Clara: Coming with us as our guide is Mr. Sven.
 
 Sven: *wave hand awkwardly at camera* Greetings
 
-Clara: Now without further ado, how 
+Clara: Now without further ado, can you explain what's the deal with this diving spot?
+
+Sven: No. I'm not gonna bore your audience with 3 Hours lore dump. 
+
+Sven: I need to explain to you the procedure when we dive there. So we can do it safely.
+
+Sven: It earned the danger and difficulty for a reason. 
+
+Sven: Multiple reasons to be exact
+
+Clara: Okay
+
+Sven: First rule, I take lead. When I say move forward we move forward.
+
+Sven: If I say return, we return.
+
+Sven: Second, Do no stray away from me or from marker I left. The area's anomally can move and
+      harm you in unexpected manner. 

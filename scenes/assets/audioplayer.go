@@ -55,6 +55,23 @@ func (p *AudioPlayer) AudioPlayer() *audio.Player {
 func (p *AudioPlayer) Close() error {
 	return p.audioPlayer.Close()
 }
+
+// vol should be somehwere between 0-128
+func (p *AudioPlayer) SetBgmVolume(vol int) {
+	p.bgmVolume128 = vol
+	p.audioPlayer.SetVolume(float64(p.bgmVolume128) / 128)
+}
+func (p *AudioPlayer) GetBGMVolume() int {
+	return p.bgmVolume128
+}
+
+// vol should be somehwere between 0-128
+func (p *AudioPlayer) SetSfxVolume(vol int) {
+	p.sfxVolume128 = vol
+}
+func (p *AudioPlayer) GetSfxVolume() int {
+	return p.sfxVolume128
+}
 func (p *AudioPlayer) Update() error {
 	select {
 	case p.seBytes = <-p.seCh:
