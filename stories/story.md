@@ -215,9 +215,65 @@ Sven: Multiple reasons to be exact
 
 Clara: Okay
 
-Sven: First rule, I take lead. When I say move forward we move forward.
+Sven: Firstly I need to get telemetry of all your diving suits to assess when we need to dip out 
 
-Sven: If I say return, we return.
+Sven: If your suit have issues and can't sync with my suit, let me know no matter how small the issue might be.
 
 Sven: Second, Do no stray away from me or from marker I left. The area's anomally can move and
-      harm you in unexpected manner. 
+      harm you in unexpected manner if you're not trained to do so.
+
+Sven: Understand? 
+
+Clara: Yes
+
+Sven: Alright, *everyone sync their suit telemetry with sven*. 
+
+Sven: Now I'll open the portal and going first. Get in when I give you the signal
+
+*Sven use his grimoiregun to open a portal and dive in*
+
+*change bg to some abandoned concrete plant*
+
+Sven: Allright is save, dive in!!
+
+*Clara and wang dive in*
+
+Sven: Welcome to MeshNode of Marduk Zone A.
+
+Sven: As you can see, it is mostly just shaped like an abandoned concrete plant. With some....
+
+*manticore rat run across in front of them*
+
+Clara: *EEEEEK!!!*
+
+Sven: ...Small critters, living here.
+
+Sven: Alright make sure you're not wandering around without me.
+
+*Shoots scan spell*
+
+Sven: It is safe there. Lets move
+
+They ventured into the deeper area of the plant. Sven repeatedly shoots scan marker spells along the way. Ensuring they don't lose their way
+
+Clara: So, what's the deal with this concrete plant?
+
+Sven: Good question, nobody knows.
+
+Sven: It is already here when this dive zone discovered.
+
+Sven: In the past, people used this mesh as jumping point to aerial fishery plane
+
+Sven: but since we found safer route, it is mostly abandoned.
+
+Sven: The one that still visiting are researchers studying bladewing bat migration which happened every few years
+
+Sven: And the bladewing bat are the main reason the asylum gets closed
+
+Sven: When a lot of them gathered, it caused noises that messes up the patients in the asylum.
+
+Sven: So the asylum is closed and moved somewhere.
+
+as they went deeper sven's sensor caught incoming object
+
+Sven: Take cover, something dangerous is coming!!
