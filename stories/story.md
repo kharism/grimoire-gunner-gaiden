@@ -103,7 +103,7 @@ Rose: Already done with your mission, Sven? Your client has been waiting for you
 
 Sven: Yea, Where is he?
 
-a short bald man with an unkempt beard, approached them.
+a short man with a fedora and unkempt beard, approached them.
 
 Sudri: Ashton!! C'mere, my boy!!!
 

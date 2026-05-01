@@ -9,6 +9,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/audio"
 	"github.com/hajimehoshi/ebiten/v2/audio/mp3"
 	"github.com/hajimehoshi/ebiten/v2/audio/vorbis"
+	"github.com/kharism/hanashi/core"
 )
 
 var musicPlayerCh chan *AudioPlayer
@@ -54,6 +55,65 @@ func (p *AudioPlayer) AudioPlayer() *audio.Player {
 }
 func (p *AudioPlayer) Close() error {
 	return p.audioPlayer.Close()
+}
+func (p *AudioPlayer) PlayBgm(audio []byte, format core.MusicType) {
+	var err error
+	var s io.Reader
+	if format == core.TypeMP3 {
+		s, err = mp3.DecodeWithoutResampling(bytes.NewReader(audio))
+		// p.seCh <- param
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+		// b, err = io.ReadAll(s)
+	} else if format == core.TypeOgg {
+		s, err = vorbis.DecodeWithoutResampling(bytes.NewReader(audio))
+		// p.seCh <- param
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+		// b, err = io.ReadAll(s)
+	}
+	pl, err := audioContext.NewPlayer(s)
+	if err != nil {
+		return
+	}
+	p.audioPlayer = pl
+	p.audioPlayer.Play()
+	//p.loopBgm = true
+}
+func (p *AudioPlayer) PlaySfx(audio []byte, format core.MusicType, sfxname string) {
+	go func() {
+		var b []byte
+		var err error
+		var s io.Reader
+		if format == core.TypeMP3 {
+			s, err = mp3.DecodeWithoutResampling(bytes.NewReader(audio))
+			// p.seCh <- param
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			b, err = io.ReadAll(s)
+		} else if format == core.TypeOgg {
+			s, err = vorbis.DecodeWithoutResampling(bytes.NewReader(audio))
+			// p.seCh <- param
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			b, err = io.ReadAll(s)
+		}
+
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+		p.seCh <- b
+	}()
+
 }
 
 // vol should be somehwere between 0-128
@@ -145,6 +205,31 @@ type audioStream interface {
 	Length() int64
 }
 
+func NewAudioInterfacer() (*AudioPlayer, error) {
+	type audioStream interface {
+		io.ReadSeeker
+		Length() int64
+	}
+	const bytesPerSample = 4 // TODO: This should be defined in audio package
+
+	var s audioStream
+	p, err := audioContext.NewPlayer(s)
+	if err != nil {
+		return nil, err
+	}
+
+	player := &AudioPlayer{
+		audioContext: audioContext,
+		audioPlayer:  p,
+		//total:        time.Second * time.Duration(s.Length()) / bytesPerSample / sampleRate,
+		//bgmVolume128: BgmVolume,
+		//sfxVolume128: SfxVolume,
+		seCh:    make(chan []byte, 100),
+		seBytes: []byte{},
+		//musicType:    musicType,
+	}
+	return player, nil
+}
 func NewAudioPlayer(audioByte []byte, musicType musicType, BgmVolume, SfxVolume int) (*AudioPlayer, error) {
 
 	const bytesPerSample = 4 // TODO: This should be defined in audio package

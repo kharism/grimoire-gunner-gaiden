@@ -4,8 +4,10 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/joelschutz/stagehand"
 	scene "github.com/kharism/GrimoireGunner2/scenes"
+	"github.com/kharism/hanashi/core"
 )
 
 const (
@@ -35,20 +37,29 @@ func (g *Game) GetLayout() (width, height int) {
 // return the starting text position where the box containing name of the character appear on the scene
 // return negative number if no such box needed
 func (g *Game) GetNamePosition() (x, y int) {
-	return 128, 600 - 150
+	return 10 + 124, 360 - 150 + 10
 }
 
 // get the starting position of the text
 func (g *Game) GetTextPosition() (x, y int) {
-	return 128, 600 - 120
+	return 10 + 124, 360 - 120 + 10
+}
+func (g *Game) GetTextBGPosition() (x, y int) {
+	return 0, 360 - 150
 }
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
-	ebiten.SetWindowTitle("GrimoireGunner2")
+	ebiten.SetWindowTitle("GrimoireGunnerGaiden")
 	state := scene.NewSceneData()
 	// TODO: read config off permanent storage
-	state.BGMVolume = 128
+	state.BGMVolume = 0
 	state.SfxVolume = 64
+
+	openingScene := scene.NewHanashiScene(scene.Scene1(&Game{}))
+	openingScene.EscapeTrigger = scene.TriggerToMain
+
+	combatScene := &scene.CombatScene{}
+
 	ruleSet := map[stagehand.Scene[*scene.SceneData]][]stagehand.Directive[*scene.SceneData]{
 		scene.MainMenuInstance: {
 			stagehand.Directive[*scene.SceneData]{Dest: scene.OptionSceneInstance, Trigger: scene.TriggerToOption},
@@ -56,8 +67,14 @@ func main() {
 		scene.OptionSceneInstance: {
 			stagehand.Directive[*scene.SceneData]{Dest: scene.MainMenuInstance, Trigger: scene.TriggerToMain},
 		},
+		openingScene: {
+			stagehand.Directive[*scene.SceneData]{Dest: scene.MainMenuInstance, Trigger: scene.TriggerToMain},
+		},
 	}
-	manager := stagehand.NewSceneDirector[*scene.SceneData](scene.MainMenuInstance, state, ruleSet)
+	core.DetectKeyboardNext = func() bool {
+		return inpututil.IsKeyJustReleased(ebiten.KeyQ)
+	}
+	manager := stagehand.NewSceneDirector[*scene.SceneData](combatScene, state, ruleSet)
 	if err := ebiten.RunGame(manager); err != nil {
 		log.Fatal(err)
 	}
