@@ -1,6 +1,10 @@
 package component
 
-import "github.com/yohamta/donburi"
+import (
+	"fmt"
+
+	"github.com/yohamta/donburi"
+)
 
 // the grid plane is X and Z (Z is Z-buffer), Y is the height
 // the closer to the camera the higher Z-buffer is
@@ -11,6 +15,9 @@ type PositionComponentData struct {
 
 func (p PositionComponentData) Order() int {
 	return int(p.Z * 100)
+}
+func (p *PositionComponentData) String() string {
+	return fmt.Sprintf("{X:%f,Y:%f,Z:%f}", p.X, p.Y, p.Z)
 }
 
 var Position = donburi.NewComponentType[PositionComponentData]()

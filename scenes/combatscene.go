@@ -27,6 +27,9 @@ func (c *CombatScene) isLegalMove(pos component.PositionComponentData) bool {
 	if pos.X < 0 || pos.X > 608 {
 		return false
 	}
+	if pos.Y > 300 || pos.Y < 180 {
+		return false
+	}
 	return true
 }
 func (c *CombatScene) Update() error {
@@ -39,36 +42,41 @@ func (c *CombatScene) Update() error {
 	}
 	playerEntry := c.world.Entry(c.player)
 	posData := component.Position.GetValue(playerEntry)
-	if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
-		posData.X += gridLength
-		if c.isLegalMove(posData) {
-			playerEntry := c.world.Entry(c.player)
-			component.Velocity.Get(playerEntry).X = 14
-		}
+	vData := component.Velocity.GetValue(playerEntry)
 
-	} else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
-		posData.X -= gridLength
-		if c.isLegalMove(posData) {
-			playerEntry := c.world.Entry(c.player)
-			component.Velocity.Get(playerEntry).X = -14
-		}
+	if !vData.IsMoving() {
+		if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+			posData.X += gridLength
+			if c.isLegalMove(posData) {
+				playerEntry := c.world.Entry(c.player)
+				component.Velocity.Get(playerEntry).X = 14
+			}
 
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+			posData.X -= gridLength
+			if c.isLegalMove(posData) {
+				playerEntry := c.world.Entry(c.player)
+				component.Velocity.Get(playerEntry).X = -14
+			}
+
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+			posData.Y += gridWidth
+			if c.isLegalMove(posData) {
+				playerEntry := c.world.Entry(c.player)
+				component.Velocity.Get(playerEntry).Y = 7
+				component.Velocity.Get(playerEntry).Z = 7
+			}
+
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+			posData.Y -= gridWidth
+			if c.isLegalMove(posData) {
+				playerEntry := c.world.Entry(c.player)
+				component.Velocity.Get(playerEntry).Y = -7
+				component.Velocity.Get(playerEntry).Z = -7
+			}
+
+		}
 	}
-	// if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
-	// 	posData.Y += gridLength
-	// 	if c.isLegalMove(posData) {
-	// 		playerEntry := c.world.Entry(c.player)
-	// 		component.Velocity.Get(playerEntry).X = 14
-	// 	}
-
-	// } else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
-	// 	posData.Y -= gridLength
-	// 	if c.isLegalMove(posData) {
-	// 		playerEntry := c.world.Entry(c.player)
-	// 		component.Velocity.Get(playerEntry).Y = -14
-	// 	}
-
-	// }
 
 	c.ecs.Update()
 	return nil
@@ -76,6 +84,7 @@ func (c *CombatScene) Update() error {
 func (c *CombatScene) Draw(screen *ebiten.Image) {
 	screen.Clear()
 	c.ecs.DrawLayer(LayerCharacter, screen)
+	c.ecs.DrawLayer(LayerDebug, screen)
 }
 func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*SceneData]) {
 	s.sm = manager.(*stagehand.SceneDirector[*SceneData]) // This type assertion is important
@@ -88,6 +97,7 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	LoadBlock(s.world, state, 2, 1)
 	s.ecs.AddSystem(system.PlayerMovementHandler)
 	s.ecs.AddRenderer(LayerCharacter, system.UnifiedRenderer)
+	s.ecs.AddRenderer(LayerDebug, system.DrawDebug)
 
 }
 func LoadPlayer(world donburi.World, state *SceneData) donburi.Entity {

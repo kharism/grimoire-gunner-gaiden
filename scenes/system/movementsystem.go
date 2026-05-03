@@ -38,6 +38,17 @@ func PlayerMovementHandler(e *ecs.ECS) {
 			nextCol = int(math.Ceil(float64(pos.X+vel.X-float64(GridStartPointX)) / float64(GridLength)))
 		}
 
+		var curRow int
+		var nextRow int
+
+		if vel.Y > 0 {
+			curRow = int(float64(pos.Y-float64(GridStartPointY)) / float64(GridWidth))
+			nextRow = int(float64(pos.Y+vel.Y-float64(GridStartPointY)) / float64(GridWidth))
+		} else if vel.Y < 0 {
+			curRow = int(math.Ceil(float64(pos.Y-float64(GridStartPointY)) / float64(GridWidth)))
+			nextRow = int(math.Ceil(float64(pos.Y+vel.Y-float64(GridStartPointY)) / float64(GridWidth)))
+		}
+
 		//pos.X += vel.X
 		if curCol != nextCol && vel.X != 0 {
 			pos.X = float64(GridStartPointX + (nextCol * GridLength))
@@ -46,8 +57,17 @@ func PlayerMovementHandler(e *ecs.ECS) {
 			pos.X += vel.X
 		}
 
-		pos.Y += vel.Y
-		pos.Z += vel.Z
+		if curRow != nextRow && vel.Y != 0 {
+			pos.Y = float64(GridStartPointY + (nextRow * GridWidth))
+			vel.Y = 0
+			vel.Z = 0
+		} else {
+			pos.Y += vel.Y
+			pos.Z += vel.Z
+		}
+
+		//pos.Y += vel.Y
+
 		if entry.HasComponent(component.Acceleration) {
 			acc := component.Acceleration.Get(entry)
 			vel.X += acc.DX

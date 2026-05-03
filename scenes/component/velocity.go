@@ -1,9 +1,17 @@
 package component
 
-import "github.com/yohamta/donburi"
+import (
+	"math"
+
+	"github.com/yohamta/donburi"
+)
 
 type VelocityComponentData struct {
 	X, Y, Z float64
+}
+
+func (v *VelocityComponentData) IsMoving() bool {
+	return math.Abs(v.X)+math.Abs(v.Y)+math.Abs(v.Z) != 0
 }
 
 var Velocity = donburi.NewComponentType[VelocityComponentData]()
