@@ -84,6 +84,7 @@ func (c *CombatScene) Update() error {
 func (c *CombatScene) Draw(screen *ebiten.Image) {
 	screen.Clear()
 	c.ecs.DrawLayer(LayerCharacter, screen)
+	c.ecs.DrawLayer(LayerHP, screen)
 	c.ecs.DrawLayer(LayerDebug, screen)
 }
 func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*SceneData]) {
@@ -98,6 +99,7 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	s.ecs.AddSystem(system.PlayerMovementHandler)
 	s.ecs.AddRenderer(LayerCharacter, system.UnifiedRenderer)
 	s.ecs.AddRenderer(LayerDebug, system.DrawDebug)
+	s.ecs.AddRenderer(LayerHP, system.DrawHP)
 
 }
 func LoadPlayer(world donburi.World, state *SceneData) donburi.Entity {
