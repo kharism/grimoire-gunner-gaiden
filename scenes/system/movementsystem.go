@@ -27,6 +27,8 @@ func isLegalMove(pos component.PositionComponentData) bool {
 	return true
 }
 func detectMovementKey(world donburi.World) {
+	xVelo := 14.0
+	yVelo := xVelo / 2
 	query := donburi.NewQuery(filter.Contains(component.PlayerTag))
 
 	playerEntry, _ := query.First(world) //world.Entry(c.player)
@@ -38,29 +40,29 @@ func detectMovementKey(world donburi.World) {
 			posData.X += float64(GridLength)
 			if isLegalMove(posData) {
 				//playerEntry := world.Entry(playerEntry)
-				component.Velocity.Get(playerEntry).X = 14
+				component.Velocity.Get(playerEntry).X = xVelo
 			}
 
 		} else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
 			posData.X -= float64(GridLength)
 			if isLegalMove(posData) {
 				//playerEntry := c.world.Entry(c.player)
-				component.Velocity.Get(playerEntry).X = -14
+				component.Velocity.Get(playerEntry).X = -xVelo
 			}
 
 		} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 			posData.Y += float64(GridWidth)
 			if isLegalMove(posData) {
-				component.Velocity.Get(playerEntry).Y = 7
-				component.Velocity.Get(playerEntry).Z = 7
+				component.Velocity.Get(playerEntry).Y = yVelo
+				component.Velocity.Get(playerEntry).Z = yVelo
 			}
 
 		} else if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
 			posData.Y -= float64(GridWidth)
 			if isLegalMove(posData) {
 				//playerEntry := c.world.Entry(c.player)
-				component.Velocity.Get(playerEntry).Y = -7
-				component.Velocity.Get(playerEntry).Z = -7
+				component.Velocity.Get(playerEntry).Y = -yVelo
+				component.Velocity.Get(playerEntry).Z = -yVelo
 			}
 
 		}
