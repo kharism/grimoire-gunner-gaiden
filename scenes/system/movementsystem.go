@@ -18,10 +18,10 @@ var GridStartPointX int
 var GridStartPointY int
 
 func isLegalMove(pos component.PositionComponentData) bool {
-	if pos.X < 0 || pos.X > 608 {
+	if pos.X < 0 || pos.X > float64(GridStartPointX+(7*GridLength)) {
 		return false
 	}
-	if pos.Y > 300 || pos.Y < 180 {
+	if pos.Y > float64(GridStartPointY+3*GridWidth) || pos.Y < float64(GridStartPointY) {
 		return false
 	}
 	return true
