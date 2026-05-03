@@ -2,7 +2,6 @@ package scene
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/joelschutz/stagehand"
 	"github.com/kharism/GrimoireGunner2/scenes/assets"
 	"github.com/kharism/GrimoireGunner2/scenes/component"
@@ -23,15 +22,6 @@ type CombatScene struct {
 	loopMusic   bool
 }
 
-func (c *CombatScene) isLegalMove(pos component.PositionComponentData) bool {
-	if pos.X < 0 || pos.X > 608 {
-		return false
-	}
-	if pos.Y > 300 || pos.Y < 180 {
-		return false
-	}
-	return true
-}
 func (c *CombatScene) Update() error {
 	if c.loopMusic && !c.musicPlayer.AudioPlayer().IsPlaying() {
 		c.musicPlayer.AudioPlayer().Rewind()
@@ -39,43 +29,6 @@ func (c *CombatScene) Update() error {
 	}
 	if c.musicPlayer != nil {
 		c.musicPlayer.Update()
-	}
-	playerEntry := c.world.Entry(c.player)
-	posData := component.Position.GetValue(playerEntry)
-	vData := component.Velocity.GetValue(playerEntry)
-
-	if !vData.IsMoving() {
-		if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
-			posData.X += gridLength
-			if c.isLegalMove(posData) {
-				playerEntry := c.world.Entry(c.player)
-				component.Velocity.Get(playerEntry).X = 14
-			}
-
-		} else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
-			posData.X -= gridLength
-			if c.isLegalMove(posData) {
-				playerEntry := c.world.Entry(c.player)
-				component.Velocity.Get(playerEntry).X = -14
-			}
-
-		} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
-			posData.Y += gridWidth
-			if c.isLegalMove(posData) {
-				playerEntry := c.world.Entry(c.player)
-				component.Velocity.Get(playerEntry).Y = 7
-				component.Velocity.Get(playerEntry).Z = 7
-			}
-
-		} else if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
-			posData.Y -= gridWidth
-			if c.isLegalMove(posData) {
-				playerEntry := c.world.Entry(c.player)
-				component.Velocity.Get(playerEntry).Y = -7
-				component.Velocity.Get(playerEntry).Z = -7
-			}
-
-		}
 	}
 
 	c.ecs.Update()

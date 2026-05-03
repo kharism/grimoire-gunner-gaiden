@@ -3,6 +3,8 @@ package system
 import (
 	"math"
 
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/kharism/GrimoireGunner2/scenes/component"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/ecs"
@@ -15,7 +17,57 @@ var GridLength int //X Axis
 var GridStartPointX int
 var GridStartPointY int
 
+func isLegalMove(pos component.PositionComponentData) bool {
+	if pos.X < 0 || pos.X > 608 {
+		return false
+	}
+	if pos.Y > 300 || pos.Y < 180 {
+		return false
+	}
+	return true
+}
+func detectMovementKey(world donburi.World) {
+	query := donburi.NewQuery(filter.Contains(component.PlayerTag))
+
+	playerEntry, _ := query.First(world) //world.Entry(c.player)
+	posData := component.Position.GetValue(playerEntry)
+	vData := component.Velocity.GetValue(playerEntry)
+
+	if !vData.IsMoving() {
+		if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+			posData.X += float64(GridLength)
+			if isLegalMove(posData) {
+				//playerEntry := world.Entry(playerEntry)
+				component.Velocity.Get(playerEntry).X = 14
+			}
+
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+			posData.X -= float64(GridLength)
+			if isLegalMove(posData) {
+				//playerEntry := c.world.Entry(c.player)
+				component.Velocity.Get(playerEntry).X = -14
+			}
+
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+			posData.Y += float64(GridWidth)
+			if isLegalMove(posData) {
+				component.Velocity.Get(playerEntry).Y = 7
+				component.Velocity.Get(playerEntry).Z = 7
+			}
+
+		} else if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+			posData.Y -= float64(GridWidth)
+			if isLegalMove(posData) {
+				//playerEntry := c.world.Entry(c.player)
+				component.Velocity.Get(playerEntry).Y = -7
+				component.Velocity.Get(playerEntry).Z = -7
+			}
+
+		}
+	}
+}
 func PlayerMovementHandler(e *ecs.ECS) {
+	detectMovementKey(e.World)
 	query := donburi.NewQuery(
 		filter.Contains(
 			component.Position,
