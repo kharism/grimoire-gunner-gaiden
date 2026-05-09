@@ -68,6 +68,32 @@ func detectMovementKey(world donburi.World) {
 		}
 	}
 }
+func NonPlayerMovementHandler(e *ecs.ECS) {
+	query := donburi.NewQuery(
+		filter.And(
+			filter.Contains(
+				component.Position,
+				component.Velocity,
+			),
+			filter.Not(filter.Contains(
+				component.PlayerTag,
+			)),
+		),
+	)
+	for entry := range query.Iter(e.World) {
+		pos := component.Position.Get(entry)
+		vel := component.Velocity.Get(entry)
+		pos.X += vel.X
+		pos.Y += vel.Y
+		pos.Z += vel.Z
+		if entry.HasComponent(component.Acceleration) {
+			acc := component.Acceleration.Get(entry)
+			vel.X += acc.DX
+			vel.Y += acc.DY
+			vel.Z += acc.DZ
+		}
+	}
+}
 func PlayerMovementHandler(e *ecs.ECS) {
 	detectMovementKey(e.World)
 	query := donburi.NewQuery(

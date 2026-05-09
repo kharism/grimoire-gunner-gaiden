@@ -48,8 +48,11 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	s.data = state
 	LoadGrid(s.world)
 	s.player = LoadPlayer(s.world, state)
-	LoadBlock(s.world, state, 2, 1)
+	LoadBlock(s.world, state, 2, 6)
 	s.ecs.AddSystem(system.PlayerMovementHandler)
+	s.ecs.AddSystem(system.NonPlayerMovementHandler)
+	s.ecs.AddSystem(system.PlayerAttackHandler)
+	s.ecs.AddSystem(system.DamageSystemHandler)
 	s.ecs.AddRenderer(LayerCharacter, system.UnifiedRenderer)
 	s.ecs.AddRenderer(LayerDebug, system.DrawDebug)
 	s.ecs.AddRenderer(LayerHP, system.DrawHP)
@@ -66,6 +69,7 @@ func LoadPlayer(world donburi.World, state *SceneData) donburi.Entity {
 	playerEntry := world.Entry(playerEntity)
 	component.Health.Set(playerEntry, &component.HealthData{
 		HP:    100,
+		Name:  "Player",
 		MaxHP: 100,
 	})
 	component.Sprite.Set(playerEntry, &component.SpriteData{
