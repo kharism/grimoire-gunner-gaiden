@@ -53,6 +53,7 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	s.ecs.AddSystem(system.NonPlayerMovementHandler)
 	s.ecs.AddSystem(system.PlayerAttackHandler)
 	s.ecs.AddSystem(system.DamageSystemHandler)
+	s.ecs.AddSystem(system.PositionCheckerSystem)
 	s.ecs.AddRenderer(LayerCharacter, system.UnifiedRenderer)
 	s.ecs.AddRenderer(LayerDebug, system.DrawDebug)
 	s.ecs.AddRenderer(LayerHP, system.DrawHP)

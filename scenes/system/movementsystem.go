@@ -80,6 +80,7 @@ func NonPlayerMovementHandler(e *ecs.ECS) {
 			)),
 		),
 	)
+	listToRemove := []donburi.Entity{}
 	for entry := range query.Iter(e.World) {
 		pos := component.Position.Get(entry)
 		vel := component.Velocity.Get(entry)
@@ -92,6 +93,12 @@ func NonPlayerMovementHandler(e *ecs.ECS) {
 			vel.Y += acc.DY
 			vel.Z += acc.DZ
 		}
+		if pos.X <= 0 || pos.X >= 640 || pos.Y > 360 || pos.Y < -40 {
+			listToRemove = append(listToRemove, entry.Entity())
+		}
+	}
+	for _, i := range listToRemove {
+		e.World.Remove(i)
 	}
 }
 func PlayerMovementHandler(e *ecs.ECS) {

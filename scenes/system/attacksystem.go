@@ -1,9 +1,12 @@
 package system
 
 import (
+	"fmt"
+	"math"
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/kharism/GrimoireGunner2/scenes/assets"
 	"github.com/kharism/GrimoireGunner2/scenes/component"
 	"github.com/yohamta/donburi"
@@ -23,6 +26,29 @@ func basicProjectile(ecs *ecs.ECS, pos component.PositionComponentData) {
 		Damage: 2,
 		Sprite: assets.Bullet,
 		OnHit:  SingleHitProjectile,
+	})
+}
+func arcProjectile(e *ecs.ECS, pos component.PositionComponentData) {
+	bombEntity := component.NewProjectile(e.World, component.ProjectileParam{
+		Vx:     14,
+		Vy:     -18,
+		Pos:    pos,
+		Damage: 100,
+		Sprite: assets.Bomb,
+		OnHit:  SingleHitProjectile,
+	})
+	fmt.Println(pos.String())
+	entry := e.World.Entry(*bombEntity)
+	entry.AddComponent(component.Acceleration)
+	component.Acceleration.Set(entry, &component.AccellerationComponentData{DY: 3})
+	entry.AddComponent(component.PositionChecker)
+	component.PositionChecker.SetValue(entry, func(e *ecs.ECS) bool {
+		pos := component.Position.Get(entry)
+		if math.Abs(pos.Y-pos.Z) <= 13 {
+			e.World.Remove(entry.Entity())
+			return true
+		}
+		return false
 	})
 }
 
@@ -51,6 +77,13 @@ func PlayerAttackHandler(e *ecs.ECS) {
 
 			basicProjectile(e, component.PositionComponentData{X: playerPos.X + float64(GridLength), Y: playerPos.Y, Z: playerPos.Z})
 		}
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyR) {
+		playerE, _ := playerQuery.FirstEntity(e.World)
+		playerPos := component.Position.GetValue(playerE)
+		component.Sprite.Get(playerE).Image = assets.SvenSprite2
+		Revertbackspritetime = time.Now().Add(300 * time.Millisecond)
+		arcProjectile(e, component.PositionComponentData{X: playerPos.X + float64(GridLength), Y: playerPos.Y - 90, Z: playerPos.Z})
 	}
 	if time.Now().After(Revertbackspritetime) {
 		playerE, _ := playerQuery.FirstEntity(e.World)

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/yohamta/donburi"
+	"github.com/yohamta/donburi/ecs"
 )
 
 // the grid plane is X and Z (Z is Z-buffer), Y is the height
@@ -20,4 +21,8 @@ func (p *PositionComponentData) String() string {
 	return fmt.Sprintf("{X:%f,Y:%f,Z:%f}", p.X, p.Y, p.Z)
 }
 
+type PositionCheckerComponent func(ecs *ecs.ECS) bool
+
 var Position = donburi.NewComponentType[PositionComponentData]()
+
+var PositionChecker = donburi.NewComponentType[PositionCheckerComponent]()
