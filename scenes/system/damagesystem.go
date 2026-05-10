@@ -33,8 +33,8 @@ func DamageSystemHandler(ecs *ecs.ECS) {
 		for target := range healthQuery.Iter(ecs.World) {
 			targetPos := component.Position.GetValue(target)
 			hazardPos := component.Position.GetValue(hazard)
-			if math.Abs(targetPos.X-hazardPos.X) < float64(GridLength) &&
-				math.Abs(targetPos.Z-hazardPos.Z) < float64(GridWidth) &&
+			if math.Abs(targetPos.X-hazardPos.X) < float64(component.GridLength) &&
+				math.Abs(targetPos.Z-hazardPos.Z) < float64(component.GridWidth) &&
 				math.Abs(targetPos.Y-hazardPos.Y) < 40 {
 				health := component.Health.Get(target)
 				validTargets = append(validTargets, target)

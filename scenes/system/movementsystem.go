@@ -11,17 +11,11 @@ import (
 	"github.com/yohamta/donburi/filter"
 )
 
-var GridWidth int  //Y Axis
-var GridLength int //X Axis
-
-var GridStartPointX int
-var GridStartPointY int
-
 func isLegalMove(pos component.PositionComponentData) bool {
-	if pos.X < 0 || pos.X > float64(GridStartPointX+(7*GridLength)) {
+	if pos.X < 0 || pos.X > float64(component.GridStartPointX+(7*component.GridLength)) {
 		return false
 	}
-	if pos.Y > float64(GridStartPointY+3*GridWidth) || pos.Y < float64(GridStartPointY) {
+	if pos.Y > float64(component.GridStartPointY+3*component.GridWidth) || pos.Y < float64(component.GridStartPointY) {
 		return false
 	}
 	return true
@@ -37,28 +31,28 @@ func detectMovementKey(world donburi.World) {
 
 	if !vData.IsMoving() {
 		if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
-			posData.X += float64(GridLength)
+			posData.X += float64(component.GridLength)
 			if isLegalMove(posData) {
 				//playerEntry := world.Entry(playerEntry)
 				component.Velocity.Get(playerEntry).X = xVelo
 			}
 
 		} else if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
-			posData.X -= float64(GridLength)
+			posData.X -= float64(component.GridLength)
 			if isLegalMove(posData) {
 				//playerEntry := c.world.Entry(c.player)
 				component.Velocity.Get(playerEntry).X = -xVelo
 			}
 
 		} else if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
-			posData.Y += float64(GridWidth)
+			posData.Y += float64(component.GridWidth)
 			if isLegalMove(posData) {
 				component.Velocity.Get(playerEntry).Y = yVelo
 				component.Velocity.Get(playerEntry).Z = yVelo
 			}
 
 		} else if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
-			posData.Y -= float64(GridWidth)
+			posData.Y -= float64(component.GridWidth)
 			if isLegalMove(posData) {
 				//playerEntry := c.world.Entry(c.player)
 				component.Velocity.Get(playerEntry).Y = -yVelo
@@ -118,35 +112,35 @@ func PlayerMovementHandler(e *ecs.ECS) {
 		var curCol int
 		var nextCol int
 		if vel.X > 0 {
-			curCol = int(float64(pos.X-float64(GridStartPointX)) / float64(GridLength))
-			nextCol = int(float64(pos.X+vel.X-float64(GridStartPointX)) / float64(GridLength))
+			curCol = int(float64(pos.X-float64(component.GridStartPointX)) / float64(component.GridLength))
+			nextCol = int(float64(pos.X+vel.X-float64(component.GridStartPointX)) / float64(component.GridLength))
 		} else if vel.X < 0 {
-			curCol = int(math.Ceil(float64(pos.X-float64(GridStartPointX)) / float64(GridLength)))
-			nextCol = int(math.Ceil(float64(pos.X+vel.X-float64(GridStartPointX)) / float64(GridLength)))
+			curCol = int(math.Ceil(float64(pos.X-float64(component.GridStartPointX)) / float64(component.GridLength)))
+			nextCol = int(math.Ceil(float64(pos.X+vel.X-float64(component.GridStartPointX)) / float64(component.GridLength)))
 		}
 
 		var curRow int
 		var nextRow int
 
 		if vel.Y > 0 {
-			curRow = int(float64(pos.Y-float64(GridStartPointY)) / float64(GridWidth))
-			nextRow = int(float64(pos.Y+vel.Y-float64(GridStartPointY)) / float64(GridWidth))
+			curRow = int(float64(pos.Y-float64(component.GridStartPointY)) / float64(component.GridWidth))
+			nextRow = int(float64(pos.Y+vel.Y-float64(component.GridStartPointY)) / float64(component.GridWidth))
 		} else if vel.Y < 0 {
-			curRow = int(math.Ceil(float64(pos.Y-float64(GridStartPointY)) / float64(GridWidth)))
-			nextRow = int(math.Ceil(float64(pos.Y+vel.Y-float64(GridStartPointY)) / float64(GridWidth)))
+			curRow = int(math.Ceil(float64(pos.Y-float64(component.GridStartPointY)) / float64(component.GridWidth)))
+			nextRow = int(math.Ceil(float64(pos.Y+vel.Y-float64(component.GridStartPointY)) / float64(component.GridWidth)))
 		}
 
 		//pos.X += vel.X
 		if curCol != nextCol && vel.X != 0 {
-			pos.X = float64(GridStartPointX + (nextCol * GridLength))
+			pos.X = float64(component.GridStartPointX + (nextCol * component.GridLength))
 			vel.X = 0
 		} else {
 			pos.X += vel.X
 		}
 
 		if curRow != nextRow && vel.Y != 0 {
-			pos.Y = float64(GridStartPointY + (nextRow * GridWidth))
-			pos.Z = float64(GridStartPointY + (nextRow * GridWidth))
+			pos.Y = float64(component.GridStartPointY + (nextRow * component.GridWidth))
+			pos.Z = float64(component.GridStartPointY + (nextRow * component.GridWidth))
 			vel.Y = 0
 			vel.Z = 0
 		} else {

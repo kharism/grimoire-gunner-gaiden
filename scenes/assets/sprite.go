@@ -2,6 +2,7 @@ package assets
 
 import (
 	"bytes"
+	"image/color"
 
 	_ "embed"
 
@@ -46,5 +47,9 @@ func init() {
 
 		imgReader = bytes.NewReader(bomb_sprite)
 		Bomb, _, _ = ebitenutil.NewImageFromReader(imgReader)
+
+		BombIcon = ebiten.NewImage(40, 40)
+		BombIcon.Fill(color.Black)
+		BombIcon.DrawImage(Bomb, &ebiten.DrawImageOptions{})
 	}
 }

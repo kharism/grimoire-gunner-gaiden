@@ -122,11 +122,11 @@ var gridLength = 80.0
 var gridWidth = 40.0
 
 func LoadGrid(world donburi.World) {
-	system.GridLength = int(gridLength)
-	system.GridWidth = int(gridWidth)
+	component.GridLength = int(gridLength)
+	component.GridWidth = int(gridWidth)
 
-	system.GridStartPointX = int(startX)
-	system.GridStartPointY = int(startY)
+	component.GridStartPointX = int(startX)
+	component.GridStartPointY = int(startY)
 	for i := 0; i < 4; i++ {
 		for j := 0; j < 8; j++ {
 			idx := world.Create(component.Position, component.Sprite, component.TileTag)
