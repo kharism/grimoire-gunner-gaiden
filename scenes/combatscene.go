@@ -49,6 +49,7 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	LoadGrid(s.world)
 	s.player = LoadPlayer(s.world, state)
 	LoadBlock(s.world, state, 2, 6)
+	LoadBlock(s.world, state, 2, 3)
 	s.ecs.AddSystem(system.PlayerMovementHandler)
 	s.ecs.AddSystem(system.NonPlayerMovementHandler)
 	s.ecs.AddSystem(system.PlayerAttackHandler)

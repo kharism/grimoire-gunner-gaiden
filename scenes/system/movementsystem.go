@@ -146,6 +146,7 @@ func PlayerMovementHandler(e *ecs.ECS) {
 
 		if curRow != nextRow && vel.Y != 0 {
 			pos.Y = float64(GridStartPointY + (nextRow * GridWidth))
+			pos.Z = float64(GridStartPointY + (nextRow * GridWidth))
 			vel.Y = 0
 			vel.Z = 0
 		} else {

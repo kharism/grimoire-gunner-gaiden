@@ -1,7 +1,6 @@
 package system
 
 import (
-	"fmt"
 	"math"
 	"time"
 
@@ -30,14 +29,14 @@ func basicProjectile(ecs *ecs.ECS, pos component.PositionComponentData) {
 }
 func arcProjectile(e *ecs.ECS, pos component.PositionComponentData) {
 	bombEntity := component.NewProjectile(e.World, component.ProjectileParam{
-		Vx:     14,
+		Vx:     17,
 		Vy:     -18,
 		Pos:    pos,
 		Damage: 100,
 		Sprite: assets.Bomb,
 		OnHit:  SingleHitProjectile,
 	})
-	fmt.Println(pos.String())
+	//fmt.Println(pos.String())
 	entry := e.World.Entry(*bombEntity)
 	entry.AddComponent(component.Acceleration)
 	component.Acceleration.Set(entry, &component.AccellerationComponentData{DY: 3})
