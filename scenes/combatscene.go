@@ -1,6 +1,8 @@
 package scene
 
 import (
+	"time"
+
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/joelschutz/stagehand"
 	"github.com/kharism/GrimoireGunner2/scenes/assets"
@@ -38,6 +40,7 @@ func (c *CombatScene) Draw(screen *ebiten.Image) {
 	screen.Clear()
 	c.ecs.DrawLayer(LayerCharacter, screen)
 	c.ecs.DrawLayer(LayerHP, screen)
+	c.ecs.DrawLayer(LayerUI, screen)
 	c.ecs.DrawLayer(LayerDebug, screen)
 }
 func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*SceneData]) {
@@ -50,14 +53,25 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	s.player = LoadPlayer(s.world, state)
 	LoadBlock(s.world, state, 2, 6)
 	LoadBlock(s.world, state, 2, 3)
+
+	system.WeaponSlot = state.Weapons
+	for _, w := range state.Weapons {
+		ent := s.world.Create(component.Ticker)
+		e := s.world.Entry(ent)
+		component.Ticker.SetValue(e, component.DummyTicker{w})
+	}
+	system.LastTick = time.Now()
+
 	s.ecs.AddSystem(system.PlayerMovementHandler)
 	s.ecs.AddSystem(system.NonPlayerMovementHandler)
 	s.ecs.AddSystem(system.PlayerAttackHandler)
 	s.ecs.AddSystem(system.DamageSystemHandler)
 	s.ecs.AddSystem(system.PositionCheckerSystem)
+	s.ecs.AddSystem(system.Tick)
 	s.ecs.AddRenderer(LayerCharacter, system.UnifiedRenderer)
 	s.ecs.AddRenderer(LayerDebug, system.DrawDebug)
 	s.ecs.AddRenderer(LayerHP, system.DrawHP)
+	s.ecs.AddRenderer(LayerUI, system.RenderWeapon)
 
 }
 func LoadPlayer(world donburi.World, state *SceneData) donburi.Entity {

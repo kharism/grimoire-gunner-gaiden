@@ -7,6 +7,8 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/joelschutz/stagehand"
 	scene "github.com/kharism/GrimoireGunner2/scenes"
+	"github.com/kharism/GrimoireGunner2/scenes/system"
+	"github.com/kharism/GrimoireGunner2/scenes/system/weapons"
 	"github.com/kharism/hanashi/core"
 )
 
@@ -54,6 +56,10 @@ func main() {
 	// TODO: read config off permanent storage
 	state.BGMVolume = 0
 	state.SfxVolume = 64
+
+	state.Weapons = []system.RenderableCaster{
+		weapons.NewGrenade(),
+	}
 
 	openingScene := scene.NewHanashiScene(scene.Scene1(&Game{}))
 	openingScene.EscapeTrigger = scene.TriggerToMain

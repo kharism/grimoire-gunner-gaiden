@@ -19,7 +19,14 @@ var lastShoot = time.Now()
 
 var Revertbackspritetime time.Time
 
-var grenade = weapons.NewGrenade()
+type RenderableCaster interface {
+	Caster
+	RenderableWeaponUi
+	Tick()
+}
+
+var SelectedSlot = 0
+var WeaponSlot = []RenderableCaster{}
 
 func PlayerAttackHandler(e *ecs.ECS) {
 	playerQuery := donburi.NewQuery(filter.Contains(
@@ -41,7 +48,10 @@ func PlayerAttackHandler(e *ecs.ECS) {
 		playerE, _ := playerQuery.FirstEntity(e.World)
 		component.Sprite.Get(playerE).Image = assets.SvenSprite2
 		Revertbackspritetime = time.Now().Add(300 * time.Millisecond)
-		grenade.Cast(e)
+		if WeaponSlot[SelectedSlot].GetCooldownProgress() == 1.0 {
+			WeaponSlot[SelectedSlot].Cast(e)
+		}
+
 	}
 	if time.Now().After(Revertbackspritetime) {
 		playerE, _ := playerQuery.FirstEntity(e.World)

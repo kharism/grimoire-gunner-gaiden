@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/kharism/GrimoireGunner2/scenes/system"
 	"github.com/yohamta/donburi"
 )
 
@@ -17,6 +18,8 @@ type SceneData struct {
 	PlayerCol      int
 	World          donburi.World
 	HanashiChoices map[string]any
+
+	Weapons []system.RenderableCaster
 
 	MusicSeek time.Duration
 

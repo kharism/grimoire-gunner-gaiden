@@ -1,0 +1,37 @@
+
+//kage:unit pixels
+package main
+
+// Progress ranges from 0.0 (empty) to 1.0 (full)
+var Iter float
+
+func Fragment(dstPos vec4, srcPos vec2, color vec4) vec4 {
+    // 1. Get the texture coordinates (0 to 1 range)
+    // Origin is top-left, we want the center to be (0.5, 0.5)
+    origin, size := imageSrcRegionOnTexture()
+    uv := (srcPos - origin) / size
+    
+    // 2. Shift UV so center is (0, 0)
+    dir := uv - vec2(0.5, 0.5)
+    
+    // 3. Calculate the angle of the current pixel
+    // atan2 returns values from -PI to PI
+    // We adjust it to range from 0 to 1, starting from the top (12 o'clock)
+    angle := (atan2(dir.y, dir.x) / (2.0 * 3.14159265)) + 0.5
+    
+    // Shift angle by 0.25 to make it start at the top instead of the right
+    angle = mod(angle + 0.25, 1.0)
+
+    // 4. Sample the original texture
+    baseColor := imageSrc0At(srcPos)
+    
+    // 5. Apply the logic: if the angle is greater than Progress, darken it
+    if angle > Iter {
+        // Option A: Make it semi-transparent grey
+        return vec4(baseColor.rgb * 0.3, baseColor.a * 0.7)
+    }
+    
+    // Otherwise, return the normal pixel
+    return baseColor
+}
+      
