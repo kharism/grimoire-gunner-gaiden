@@ -28,7 +28,16 @@ func RenderWeapon(e *ecs.ECS, screen *ebiten.Image) {
 		GeoM: geom,
 	})
 	offset := 10.0
-	for _, weapon := range WeaponSlot {
+	for curWeaponIdx, weapon := range WeaponSlot {
+		if curWeaponIdx == SelectedSlot {
+			highlightRect := ebiten.NewImage(110, 60)
+			highlightRect.Fill(color.RGBA{R: 20, G: 180, B: 80, A: 255})
+			geom2 := ebiten.GeoM{}
+			geom2.Translate(offset, Ystart)
+			screen.DrawImage(highlightRect, &ebiten.DrawImageOptions{
+				GeoM: geom2,
+			})
+		}
 		geom := ebiten.GeoM{}
 		geom.Translate(offset, Ystart)
 		progress := weapon.GetCooldownProgress()
@@ -54,6 +63,7 @@ func RenderWeapon(e *ecs.ECS, screen *ebiten.Image) {
 			},
 		}
 		text.Draw(screen, fmt.Sprintf("%.d", damage), assets.PixelOperatorFace, &textDrawOpt)
+		offset += 100
 	}
 
 }

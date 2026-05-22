@@ -59,6 +59,7 @@ func main() {
 
 	state.Weapons = []system.RenderableCaster{
 		weapons.NewGrenade(),
+		weapons.NewWdSword(),
 	}
 
 	openingScene := scene.NewHanashiScene(scene.Scene1(&Game{}))

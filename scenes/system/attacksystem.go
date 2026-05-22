@@ -44,6 +44,12 @@ func PlayerAttackHandler(e *ecs.ECS) {
 			weapons.BasicProjectile(e, component.PositionComponentData{X: playerPos.X + float64(component.GridLength), Y: playerPos.Y, Z: playerPos.Z})
 		}
 	}
+	if inpututil.IsKeyJustPressed(ebiten.Key1) {
+		SelectedSlot = 0
+	}
+	if inpututil.IsKeyJustPressed(ebiten.Key2) {
+		SelectedSlot = 1
+	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyR) {
 		playerE, _ := playerQuery.FirstEntity(e.World)
 		component.Sprite.Get(playerE).Image = assets.SvenSprite2

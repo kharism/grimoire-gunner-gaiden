@@ -16,6 +16,9 @@ var sven_sprite1 []byte
 //go:embed "img/sprites/sven_2.png"
 var sven_sprite2 []byte
 
+//go:embed "img/sprites/sven_3.png"
+var sven_sprite3 []byte
+
 //go:embed "img/sprites/cube.png"
 var cube_sprite1 []byte
 
@@ -27,6 +30,7 @@ var bullet []byte
 
 var SvenSprite1 *ebiten.Image
 var SvenSprite2 *ebiten.Image
+var SvenSprite3 *ebiten.Image
 var CubeSprite *ebiten.Image
 var Bullet *ebiten.Image
 var Bomb *ebiten.Image
@@ -38,6 +42,9 @@ func init() {
 
 		imgReader = bytes.NewReader(sven_sprite2)
 		SvenSprite2, _, _ = ebitenutil.NewImageFromReader(imgReader)
+
+		imgReader = bytes.NewReader(sven_sprite3)
+		SvenSprite3, _, _ = ebitenutil.NewImageFromReader(imgReader)
 
 		imgReader = bytes.NewReader(cube_sprite1)
 		CubeSprite, _, _ = ebitenutil.NewImageFromReader(imgReader)

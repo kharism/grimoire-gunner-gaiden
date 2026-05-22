@@ -1,7 +1,6 @@
 package system
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/kharism/GrimoireGunner2/scenes/component"
@@ -36,9 +35,9 @@ func DamageSystemHandler(ecs *ecs.ECS) {
 			if math.Abs(targetPos.X-hazardPos.X) < float64(component.GridLength) &&
 				math.Abs(targetPos.Z-hazardPos.Z) < float64(component.GridWidth) &&
 				math.Abs(targetPos.Y-hazardPos.Y) < 40 {
-				health := component.Health.Get(target)
+				// health := component.Health.Get(target)
 				validTargets = append(validTargets, target)
-				fmt.Println(health.Name)
+				// fmt.Println(health.Name)
 				// fmt.Println(targetPos.String())
 				// fmt.Println(hazardPos.String())
 
@@ -50,7 +49,7 @@ func DamageSystemHandler(ecs *ecs.ECS) {
 			}
 			if ecs.World.Valid(target.Entity()) {
 				component.OnHit.GetValue(hazard)(ecs, hazard, target)
-				if component.Health.Get(target).HP == 0 {
+				if component.Health.Get(target).HP <= 0 {
 					ecs.World.Remove(target.Entity())
 				}
 			}

@@ -11,7 +11,7 @@ import (
 
 var LastTick time.Time
 
-var DelayTick, _ = time.ParseDuration("100ms")
+var DelayTick, _ = time.ParseDuration("80ms")
 
 func Tick(e *ecs.ECS) {
 	if time.Since(LastTick) > DelayTick {

@@ -23,8 +23,8 @@ func BasicProjectile(ecs *ecs.ECS, pos component.PositionComponentData) {
 // projectile that moves in an arc
 func ArcProjectile(e *ecs.ECS, pos component.PositionComponentData) {
 	bombEntity := component.NewProjectile(e.World, component.ProjectileParam{
-		Vx:     17,
-		Vy:     -18,
+		Vx:     5.5,
+		Vy:     -4.20,
 		Pos:    pos,
 		Damage: 100,
 		Sprite: assets.Bomb,
@@ -33,7 +33,7 @@ func ArcProjectile(e *ecs.ECS, pos component.PositionComponentData) {
 	//fmt.Println(pos.String())
 	entry := e.World.Entry(*bombEntity)
 	entry.AddComponent(component.Acceleration)
-	component.Acceleration.Set(entry, &component.AccellerationComponentData{DY: 3})
+	component.Acceleration.Set(entry, &component.AccellerationComponentData{DY: 0.25})
 	entry.AddComponent(component.PositionChecker)
 	component.PositionChecker.SetValue(entry, func(e *ecs.ECS) bool {
 		pos := component.Position.Get(entry)
