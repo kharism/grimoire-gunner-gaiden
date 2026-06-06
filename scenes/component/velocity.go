@@ -15,6 +15,7 @@ func (v *VelocityComponentData) IsMoving() bool {
 }
 
 var Velocity = donburi.NewComponentType[VelocityComponentData]()
+var SingleGridMovementTag = donburi.NewTag("SingleGridMove")
 
 type AccellerationComponentData struct {
 	DX, DY, DZ float64
