@@ -2,6 +2,7 @@ package assets
 
 import (
 	"bytes"
+	"image"
 	"image/color"
 
 	_ "embed"
@@ -28,12 +29,25 @@ var bomb_sprite []byte
 //go:embed "img/sprites/bullet.png"
 var bullet []byte
 
+//go:embed "img/sprites/tank1.png"
+var tank1 []byte
+
+//go:embed "img/sprites/tank2.png"
+var tank2 []byte
+
+//go:embed "img/sprites/tank_fire_anim.png"
+var tank_anim []byte
+
 var SvenSprite1 *ebiten.Image
 var SvenSprite2 *ebiten.Image
 var SvenSprite3 *ebiten.Image
 var CubeSprite *ebiten.Image
 var Bullet *ebiten.Image
 var Bomb *ebiten.Image
+var TankSprite1 *ebiten.Image
+var TankSprite2 *ebiten.Image //warmup
+var TankSprite3 *ebiten.Image
+var TankAnimFrames []*ebiten.Image
 
 func init() {
 	if SvenSprite1 == nil {
@@ -54,6 +68,17 @@ func init() {
 
 		imgReader = bytes.NewReader(bomb_sprite)
 		Bomb, _, _ = ebitenutil.NewImageFromReader(imgReader)
+
+		imgReader = bytes.NewReader(tank1)
+		TankSprite1, _, _ = ebitenutil.NewImageFromReader(imgReader)
+		imgReader = bytes.NewReader(tank2)
+		TankSprite2, _, _ = ebitenutil.NewImageFromReader(imgReader)
+		imgReader = bytes.NewReader(tank_anim)
+		TankSprite3, _, _ = ebitenutil.NewImageFromReader(imgReader)
+		TankAnimFrames = []*ebiten.Image{}
+		for i := 0; i < TankSprite3.Bounds().Dx(); i += 80 {
+			TankAnimFrames = append(TankAnimFrames, TankSprite3.SubImage(image.Rect(i, 0, i+80, 120)).(*ebiten.Image))
+		}
 
 		BombIcon = ebiten.NewImage(40, 40)
 		BombIcon.Fill(color.Black)

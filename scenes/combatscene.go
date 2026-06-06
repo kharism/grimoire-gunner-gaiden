@@ -8,6 +8,7 @@ import (
 	"github.com/kharism/GrimoireGunner2/scenes/assets"
 	"github.com/kharism/GrimoireGunner2/scenes/component"
 	"github.com/kharism/GrimoireGunner2/scenes/system"
+	"github.com/kharism/GrimoireGunner2/scenes/system/enemies"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/ecs"
 )
@@ -51,9 +52,31 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	s.data = state
 	LoadGrid(s.world)
 	s.player = LoadPlayer(s.world, state)
-	LoadBlock(s.world, state, 2, 6)
-	LoadBlock(s.world, state, 2, 7)
+	//LoadBlock(s.world, state, 2, 6)
+	//LoadBlock(s.world, state, 2, 7)
+
+	// tankEntity := s.world.Create(
+	// 	component.Position,
+	// 	component.Sprite,
+	// )
+	// tankEntry := s.world.Entry(tankEntity)
+	// component.Sprite.Set(tankEntry, &component.SpriteData{
+	// 	Image: assets.TankSprite1,
+	// })
+	// gridStartX := 5
+	// gridStartY := 2
+	// component.Position.Set(tankEntry, &component.PositionComponentData{
+	// 	X: startX + float64(gridStartX)*gridLength,
+	// 	Z: startX + float64(gridStartY)*gridLength,
+	// 	Y: startX + float64(gridStartY)*gridLength,
+	// })
+
 	LoadBlock(s.world, state, 2, 3)
+	enemies.GridLength = gridLength
+	enemies.GridWidth = gridWidth
+	enemies.StartX = startX
+	enemies.StartY = startY
+	enemies.LoadTank(s.ecs, 2, 5)
 
 	system.WeaponSlot = state.Weapons
 	for _, w := range state.Weapons {
@@ -116,6 +139,7 @@ func LoadBlock(world donburi.World, state *SceneData, row, col int) {
 	component.Health.Set(playerEntry, &component.HealthData{
 		HP:    100,
 		MaxHP: 100,
+		Name:  "rock",
 	})
 	component.Sprite.Set(playerEntry, &component.SpriteData{
 		Image: assets.CubeSprite,
