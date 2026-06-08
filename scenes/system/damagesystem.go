@@ -3,6 +3,7 @@ package system
 import (
 	"math"
 
+	"github.com/kharism/GrimoireGunner2/scenes/assets"
 	"github.com/kharism/GrimoireGunner2/scenes/component"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/ecs"
@@ -50,9 +51,50 @@ func DamageSystemHandler(ecs *ecs.ECS) {
 			if ecs.World.Valid(target.Entity()) {
 				component.OnHit.GetValue(hazard)(ecs, hazard, target)
 				if component.Health.Get(target).HP <= 0 {
+					pos := component.Position.GetValue(target)
+					createExplosion(ecs, pos)
 					ecs.World.Remove(target.Entity())
 				}
 			}
 		}
 	}
+}
+
+type ExplosionTicker struct {
+	CurrentTick    int
+	explosionEntry *donburi.Entry
+	world          donburi.World
+	index          int
+}
+
+func (c *ExplosionTicker) Tick() {
+	c.CurrentTick += 3
+	if c.CurrentTick%3 == 0 {
+		c.index += 1
+		if c.index == 11 {
+			//c.explosionEntry = nil
+			c.world.Remove(c.explosionEntry.Entity())
+
+		} else {
+			if c.index < 11 {
+				component.Sprite.Get(c.explosionEntry).Image = assets.ExplosionFrames[c.index]
+			}
+		}
+	}
+
+}
+
+func createExplosion(ecs *ecs.ECS, position component.PositionComponentData) {
+	entityExplosion := ecs.World.Create(
+		component.Position,
+		component.Sprite,
+		component.Ticker,
+	)
+	explosionEntry := ecs.World.Entry(entityExplosion)
+	component.Position.Set(explosionEntry, &position)
+	component.Sprite.Set(explosionEntry, &component.SpriteData{Image: assets.ExplosionFrames[0]})
+	component.Ticker.Set(explosionEntry, &component.DummyTicker{
+		&ExplosionTicker{CurrentTick: 0, explosionEntry: explosionEntry, world: ecs.World},
+	})
+
 }

@@ -5,6 +5,7 @@ import (
 
 	"github.com/kharism/GrimoireGunner2/scenes/assets"
 	"github.com/kharism/GrimoireGunner2/scenes/component"
+	"github.com/kharism/GrimoireGunner2/scenes/system/weapons"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/ecs"
 	"github.com/yohamta/donburi/filter"
@@ -40,7 +41,7 @@ func LoadTank(e *ecs.ECS, row, col int) {
 		Y: 0,
 		Z: 0,
 	})
-	tankTicker := &TankTicker{tankEntry: tankEntry, CurrentTick: 0, CompleteTick: 60, State: "WAITING", World: e.World}
+	tankTicker := &TankTicker{tankEntry: tankEntry, CurrentTick: 0, CompleteTick: 60, State: "WAITING", ecs: e}
 	component.Ticker.SetValue(tankEntry, component.DummyTicker{tankTicker})
 
 }
@@ -50,7 +51,7 @@ type TankTicker struct {
 	CurrentTick  int
 	CompleteTick int
 	State        string
-	World        donburi.World
+	ecs          *ecs.ECS
 }
 
 // the behaviour of tank in simple state machine
@@ -66,7 +67,10 @@ func (c *TankTicker) Tick() {
 	playerQ := donburi.NewQuery(
 		filter.Contains(component.PlayerTag),
 	)
-	playerEntry, _ := playerQ.First(c.World)
+	playerEntry, ok := playerQ.First(c.ecs.World)
+	if !ok {
+		return
+	}
 	playerPos := component.Position.Get(playerEntry)
 	pos := component.Position.Get(c.tankEntry)
 	vTank := component.Velocity.Get(c.tankEntry)
@@ -112,6 +116,12 @@ func (c *TankTicker) Tick() {
 			c.State = "ATTACK"
 			c.CompleteTick = 27
 			//component.Sprite.Get(c.tankEntry).Image = assets.TankSprite1
+			projectile := weapons.ArcProjectile(c.ecs, component.PositionComponentData{
+				X: pos.X - float64(component.GridLength),
+				Y: pos.Y - 90,
+				Z: pos.Z,
+			})
+			component.Velocity.Get(projectile).X *= -1
 		case "ATTACK":
 			c.State = "WAITING"
 			c.CompleteTick = 60
