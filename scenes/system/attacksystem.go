@@ -60,7 +60,10 @@ func PlayerAttackHandler(e *ecs.ECS) {
 
 	}
 	if time.Now().After(Revertbackspritetime) {
-		playerE, _ := playerQuery.FirstEntity(e.World)
-		component.Sprite.Get(playerE).Image = assets.SvenSprite1
+		playerE, ok := playerQuery.FirstEntity(e.World)
+		if ok {
+			component.Sprite.Get(playerE).Image = assets.SvenSprite1
+		}
+
 	}
 }

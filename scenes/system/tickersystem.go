@@ -20,7 +20,10 @@ func Tick(e *ecs.ECS) {
 			filter.Contains(component.Ticker),
 		)
 		for i := range query.Iter(e.World) {
-			component.Ticker.GetValue(i).H.Tick()
+			if e.World.Valid(i.Entity()) {
+				component.Ticker.GetValue(i).H.Tick()
+			}
+
 		}
 	}
 

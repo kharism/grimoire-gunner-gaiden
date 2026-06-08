@@ -19,7 +19,7 @@ func isLegalMove(pos component.PositionComponentData, world donburi.World) bool 
 	if pos.X < 0 || pos.X > float64(component.GridStartPointX+(MAX_COLUMN*component.GridLength)) {
 		return false
 	}
-	if pos.Y > float64(component.GridStartPointY+3*component.GridWidth) || pos.Y < float64(component.GridStartPointY) {
+	if pos.Z > float64(component.GridStartPointY+3*component.GridWidth) || pos.Z < float64(component.GridStartPointY) {
 		return false
 	}
 	query := donburi.NewQuery(filter.And(
@@ -45,7 +45,10 @@ func detectMovementKey(world donburi.World) {
 	yVelo := xVelo / 2
 	query := donburi.NewQuery(filter.Contains(component.PlayerTag))
 
-	playerEntry, _ := query.First(world) //world.Entry(c.player)
+	playerEntry, ok := query.First(world) //world.Entry(c.player)
+	if !ok {
+		return
+	}
 	posData := component.Position.GetValue(playerEntry)
 	vData := component.Velocity.GetValue(playerEntry)
 
