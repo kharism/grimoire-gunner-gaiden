@@ -23,7 +23,7 @@ func BasicProjectile(ecs *ecs.ECS, pos component.PositionComponentData) {
 // projectile that moves in an arc
 func ArcProjectile(e *ecs.ECS, pos component.PositionComponentData) *donburi.Entry {
 	bombEntity := component.NewProjectile(e.World, component.ProjectileParam{
-		Vx:     5.5,
+		Vx:     5.0,
 		Vy:     -4.20,
 		Pos:    pos,
 		Damage: 100,

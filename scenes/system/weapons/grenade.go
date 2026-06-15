@@ -52,7 +52,7 @@ type DamageTicker struct {
 }
 
 func (c *DamageTicker) Tick() {
-	if c.curTick >= 2 {
+	if c.curTick >= 1 {
 		pos := component.Position.GetValue(c.Ecs.World.Entry(c.Entity))
 		assets.CreateExplosion(c.Ecs, pos)
 		c.Ecs.World.Remove(c.Entity)
