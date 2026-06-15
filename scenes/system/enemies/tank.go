@@ -1,10 +1,12 @@
 package enemies
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/kharism/GrimoireGunner2/scenes/assets"
 	"github.com/kharism/GrimoireGunner2/scenes/component"
+	"github.com/kharism/GrimoireGunner2/scenes/system"
 	"github.com/kharism/GrimoireGunner2/scenes/system/weapons"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/ecs"
@@ -122,6 +124,47 @@ func (c *TankTicker) Tick() {
 				Z: pos.Z,
 			})
 			component.Velocity.Get(projectile).X *= -1
+			component.OnHit.SetValue(projectile, weapons.ColumnHitProjectile)
+
+			component.PositionChecker.SetValue(projectile, func(e *ecs.ECS) bool {
+				pos := component.Position.Get(projectile)
+				playerQ := donburi.NewQuery(
+					filter.Contains(component.PlayerTag),
+				)
+				playerEntry, ok := playerQ.First(c.ecs.World)
+				if !ok {
+					return false
+				}
+				playerPos := component.Position.Get(playerEntry)
+
+				damage := component.Damage.GetValue(projectile)
+				if math.Abs(pos.Y-pos.Z) <= 13 {
+					cc := component.PositionComponentData{
+						X: pos.X,
+						Y: pos.Z - 40,
+						Z: pos.Z - 40,
+					}
+					fmt.Println(system.CheckIsHit(*playerPos, cc), cc)
+					weapons.CreateSplashDamage(c.ecs, damage, component.PositionComponentData{
+						X: pos.X,
+						Y: pos.Z - 40,
+						Z: pos.Z - 40,
+					})
+					weapons.CreateSplashDamage(c.ecs, damage, component.PositionComponentData{
+						X: pos.X,
+						Y: pos.Z,
+						Z: pos.Z,
+					})
+					weapons.CreateSplashDamage(c.ecs, damage, component.PositionComponentData{
+						X: pos.X,
+						Y: pos.Z + 40,
+						Z: pos.Z + 40,
+					})
+					e.World.Remove(projectile.Entity())
+					return true
+				}
+				return false
+			})
 		case "ATTACK":
 			c.State = "WAITING"
 			c.CompleteTick = 60
