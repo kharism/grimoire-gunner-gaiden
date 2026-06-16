@@ -47,6 +47,12 @@ var grid_blue []byte
 //go:embed "img/grid_red.png"
 var grid_red []byte
 
+//go:embed "img/grid_dmg.png"
+var grid_dmg []byte
+
+//go:embed "img/danger.png"
+var danger []byte
+
 //go:embed "font/Unispace Bd.otf"
 var UnispaceBdTTF []byte
 
@@ -78,6 +84,8 @@ var Wang1 *ebiten.Image
 
 var GridBlue *ebiten.Image
 var GridRed *ebiten.Image
+var GridDmg *ebiten.Image
+var GridDanger *ebiten.Image
 
 var BG1 *ebiten.Image
 
@@ -132,6 +140,12 @@ func init() {
 
 		imgReader = bytes.NewReader(grid_red)
 		GridRed, _, _ = ebitenutil.NewImageFromReader(imgReader)
+
+		imgReader = bytes.NewReader(grid_dmg)
+		GridDmg, _, _ = ebitenutil.NewImageFromReader(imgReader)
+
+		imgReader = bytes.NewReader(danger)
+		GridDanger, _, _ = ebitenutil.NewImageFromReader(imgReader)
 	}
 	s3, err := text.NewGoTextFaceSource(bytes.NewReader(UnispaceBdTTF))
 	if err != nil {

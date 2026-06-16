@@ -126,6 +126,21 @@ func (c *TankTicker) Tick() {
 			component.Velocity.Get(projectile).X *= -1
 			component.OnHit.SetValue(projectile, weapons.ColumnHitProjectile)
 
+			for i := pos.Z - float64(component.GridWidth); i <= pos.Z+float64(component.GridWidth); i += float64(component.GridWidth) {
+				if i < float64(component.GridStartPointY) || i > float64(component.GridStartPointY+4*component.GridWidth) {
+					continue
+				}
+				ff := c.ecs.World.Create(component.Position, component.DangerTag, component.Ticker)
+				dangerEntry := c.ecs.World.Entry(ff)
+				component.Position.Set(dangerEntry, &component.PositionComponentData{
+					X: pos.X - float64(4*component.GridLength),
+					Y: float64(i),
+					Z: float64(i),
+				})
+				transient := &component.TransientTicker{World: c.ecs.World, Entry: dangerEntry, TimeTick: 7}
+				component.Ticker.Set(dangerEntry, &component.DummyTicker{H: transient})
+			}
+
 			component.PositionChecker.SetValue(projectile, func(e *ecs.ECS) bool {
 				pos := component.Position.Get(projectile)
 				playerQ := donburi.NewQuery(

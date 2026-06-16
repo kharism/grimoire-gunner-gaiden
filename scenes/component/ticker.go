@@ -15,3 +15,17 @@ func (d *DummyTicker) Tick() {
 }
 
 var Ticker = donburi.NewComponentType[DummyTicker]()
+
+type TransientTicker struct {
+	World    donburi.World
+	Entry    *donburi.Entry
+	TimeTick int
+	curTick  int
+}
+
+func (t *TransientTicker) Tick() {
+	t.curTick += 1
+	if t.curTick == t.TimeTick {
+		t.World.Remove(t.Entry.Entity())
+	}
+}

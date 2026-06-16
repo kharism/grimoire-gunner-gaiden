@@ -36,6 +36,9 @@ func DamageSystemHandler(ecs *ecs.ECS) {
 	for hazard := range damageQuery.Iter(ecs.World) {
 		validTargets := []*donburi.Entry{}
 		for target := range healthQuery.Iter(ecs.World) {
+			if target == hazard {
+				continue
+			}
 			targetPos := component.Position.GetValue(target)
 			hazardPos := component.Position.GetValue(hazard)
 			if CheckIsHit(targetPos, hazardPos) {
