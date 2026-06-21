@@ -12,11 +12,11 @@
 1. inspector townsends: Battle tested investigator of the Hunter (law enforcer)
 2. Sven : Your stalker-for-hire
 
-## Story: Streamer being stalked/harassed
+## Story: Researcher being stalked/harassed
 
-Clara, an mesh (otherworldly zone that may or may not connect planes) streamer wanting to explore another mesh diving spot. Due to regulation, she need to be accompanied by at least 1 Class A Stalker-unit to do explore this relatively unsafe mesh.
+Clara, an mesh (otherworldly zone that may or may not connect planes) researcher wanting to do study on migrating animals within a mesh edge world. Due to safety concern, she need to be accompanied by at least 1 Class A Stalker-unit to do explore this unsafe mesh.
 
-She and her manager went to mesh diver guild to hire sven. Sven explains the rules of mesh diving to her and the area they are going to explore are mostly clear of hostile mesh creature. Hazzard are mostly hostile environment. 
+She and her colleague went to mesh diver guild to hire sven. Sven explains the rules of mesh diving to her and the area they are going to explore are mostly clear of hostile mesh creature. Hazards are mostly hostile environment. 
 
 They went to the diving spot in surface world
 
@@ -26,7 +26,7 @@ the area is looked after an abandoned city
 
 explore the zone
 
-things go south by appearance of another grimore gunner
+things go south by appearance of another GrimoireGunner
 
 ** combat scene **
 
@@ -91,9 +91,11 @@ ACT 1
 ### ACT 1
 
 
-the Mesh diver's guild lobby was not as full at the evening as it was in the morning. The divers left were finishing their paperwork after clearing their missions.
+The orange sun was setting on the Neo-Carcosa, covering the the whole city with its amber light. The Mesh diver's guild lobby still had some divers left, finishing their paperwork after clearing their missions for the day. 
 
-Sven entered the lobby while bringing a dog with a horn. The dog seemed energetic and attempted to drag him along. He tried his best to keep it properly leashed, so the dog did not make any mess in the lobby.  
+Their missions varied from delivering packages, Escort through mesh network, to something more dubious, legally speaking.
+
+Today, fortunately, Sven did not need to do all those things. Just Some missing pets task. He entered the lobby while bringing a horned hound. It was about his hip tall, seemed energetic and attempted to drag him along. He tried his best to keep it properly leashed and not make any mess in the lobby.  
 
 Sven: Hold on, boy. I know you missed your owner, but try not to make any trouble for the receptionists and the janitors, okay?
 
@@ -105,16 +107,16 @@ Sven: Yea, Where is he?
 
 a short man with a fedora and unkempt beard, approached them.
 
-Sudri: Ashton!! C'mere, my boy!!!
+Sudri: Ashton!! C'mere, boy!!!
 
-Sven released the leash and the dog immediately run into his owner. Sudri embraced Ashton as if they have been separated for years. The hound happily licked sudri face.
+Sven released the leash and the dog immediately run into his owner. Sudri embraced Ashton as if they have been separated for years. The hound happily licked Sudri face.
 
 
 Rose: Mission has been confirmed to be complete as client request. Now processing payment.
 
 Sudri approach sven 
 
-Sudri: Sven, I owe you one, boy. Ashton has been like my own kid. Losing him made me and my wife restless.
+Sudri: Sven my boy, I owe you one. Ashton has been like my own kid. Losing him made me and my wife restless.
 
 Sven: You're welcome Sudri.
 
@@ -126,9 +128,21 @@ He moved to a chair nearby, sat and then checked on his recording on his suit.
 
 Sven: *"Now, turn on report auto-generation wizard and hope it does not hallucinate"*
 
+*incoming calls from Shizuku*
+
+Sven: Yes?
+
+Shizuku: Sven, still on the guild?
+
+Sven: Yes 
+
+Shizuku: Can you pick up some diapers for the twins when you back?
+
+Sven: Sure.
+
 30 minutes later
 
-Sven: *It's not finished yet?. I'd rahter work on it myself*
+Sven: *It's not finished yet?. I'd rather work on it myself*
 
 Rose approached sven with 2 peoples. The first one was a young girl in her early twenty, and the second one was a man in his late twenty. 
 
@@ -146,23 +160,25 @@ Rose: We have new clients for you.
 
 The man extended his hand
 
-Wang: Nice to meet you, Mr. Sven. My name is Wang, And hers is Clara. You might have heard her online name, Diving Diva. 
+Wang: Nice to meet you, Mr. Sven. My name is Wang, And hers is Clara. And we are researchers from University of Neo-Carcosa. 
 
-Sven: Sorry, I don't watch livestream so I don't know much about this field. What's your request?
+Sven: Anything I can help?
 
-Wang: We would like to get guide for mesh diving on the abandoned old marduk asylum.
+Wang: We would like to do study on the bladewing bats migration in the mesh of abandoned Marduk Asylum.
 
-Wang: And based on regulation, we need at least 1 A-rank Stalker on diving team to get permission.
+Wang: And for safety concern we would like you as our guide
 
-Sven: I have mesh diving in that area few times in the past, there is zero reason to go there unless you're looking for something like missing pets.
+Sven: For how long ?
 
-Wang: Not even Mesh biota?
+Clara: Just 1 day.
 
-Sven: You can meet chimeracat sometimes. Hunting smaller critters. And bladewing bats occasionally stopped there during migration. 
+Sven: You two have mesh diving experience before?
 
-Clara: Then why does it demands A-rank stalker?
+Clara: Only on training mesh.
 
-Sven: The dangers there are more due to quickly shifting environmental hazards. That's the reason you need a Rank-A stalker to traverse it. You'll need someone who can cast a high-level scanner spell.
+Sven: I see. 
+
+
 
 Sven: Do you still want to dive there? 
 
@@ -219,7 +235,7 @@ Sven: Firstly I need to get telemetry of all your diving suits to assess when we
 
 Sven: If your suit have issues and can't sync with my suit, let me know no matter how small the issue might be.
 
-Sven: Second, Do no stray away from me or from marker I left. The area's anomally can move and
+Sven: Second, Do no stray away from me or from marker I left. The area's anomaly can move and
       harm you in unexpected manner if you're not trained to do so.
 
 Sven: Understand? 
