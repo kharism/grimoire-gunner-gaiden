@@ -84,6 +84,20 @@ ACT 1
 - something cozy (Jazz2 on reference folder)
 - something a bit noire (Jazz3 on reference folder)
 
+## Characterization
+
+- Sven:
+
+a Stalker class GrimoireGunner. Responsible to a fault. Want to finish his mission as soon as possible and return to his wife and children however he always try his best to keep his client save.
+
+- Clara
+
+A researcher from Neo-Carcosa university. Diving to Old Marduk Asylum to study on bladewing bat migration. Have issues moving on from her ex boyfriend.
+
+- Wang
+
+Clara's colleague. Diving to marduk asylum to help Clara with her research.
+
 
 
 ## Details
@@ -170,7 +184,7 @@ Wang: And for safety concern we would like you as our guide
 
 Sven: For how long ?
 
-Clara: Just 1 day.
+Clara: Just 2 days.
 
 Sven: You two have mesh diving experience before?
 
@@ -178,13 +192,15 @@ Clara: Only on training mesh.
 
 Sven: I see. 
 
+Sven: Do you have any self defense training? Firearm? Grimoire weaponries?
 
+Wang: No.
 
-Sven: Do you still want to dive there? 
+Sven: at least bring a long stick for self defense against wild magical creature inside the mesh.
 
-Both of them looked at each other. Finally, after few minutes of silence, Clara spoke.
+Sven: Anything you want to ask?
 
-Clara: I believe the history of the asylum itself is worthy enough for filming location.
+*Wang and clara shook their head*
 
 Sven:Alright this settled it then. When do you want to dive?
 
@@ -203,25 +219,6 @@ Sven: I will.
 ### ACT 2
 Two days later at the asylum.
 
-Wang: Is the relay station ready?
-
-Staff1: It's online.
-
-Wang: I'll handle the camera. *turn on camera on his helmet* You ready Clara?
-
-Clara: *Gives thumbs-up*
-
-Wang: We will live in 3, 2, *Create a one sign with his hand, then *
-
-Clara: Hi everyone!!! This is your Diving Diva. Now we will dive to mesh on old Marduk asylum.
-
-Clara: Coming with us as our guide is Mr. Sven.
-
-Sven: *wave hand awkwardly at camera* Greetings
-
-Clara: Now without further ado, can you explain what's the deal with this diving spot?
-
-Sven: No. I'm not gonna bore your audience with 3 Hours lore dump. 
 
 Sven: I need to explain to you the procedure when we dive there. So we can do it safely.
 
@@ -246,7 +243,7 @@ Sven: Alright, *everyone sync their suit telemetry with sven*.
 
 Sven: Now I'll open the portal and going first. Get in when I give you the signal
 
-*Sven use his grimoiregun to open a portal and dive in*
+*Sven used his Grimoiregun to open a portal and dive in*
 
 *change bg to some abandoned concrete plant*
 
@@ -270,7 +267,7 @@ Sven: Alright make sure you're not wandering around without me.
 
 Sven: It is safe there. Lets move
 
-They ventured into the deeper area of the plant. Sven repeatedly shoots scan marker spells along the way. Ensuring they don't lose their way
+They ventured into the deeper area of the plant. Sven repeatedly shoot scan marker spells along the way. Ensuring they don't lose their way
 
 Clara: So, what's the deal with this concrete plant?
 
@@ -282,14 +279,66 @@ Sven: In the past, people used this mesh as jumping point to aerial fishery plan
 
 Sven: but since we found safer route, it is mostly abandoned.
 
-Sven: The one that still visiting are researchers studying bladewing bat migration which happened every few years
+Sven: Just a bit more we can set up camp to observe the migration of bladewing bats.
 
-Sven: And the bladewing bat are the main reason the asylum gets closed
+They reached an open area inside the plant.
 
-Sven: When a lot of them gathered, it caused noises that messes up the patients in the asylum.
+Sven: Alright, I cant sense any possible anomaly in near future here. We can observe bladewing bats from the open field here, and set camp inside one of the room there.
 
-Sven: So the asylum is closed and moved somewhere.
+They Opened one of the room and see some leftover from previous occupant of the room
 
-as they went deeper sven's sensor caught incoming object
+He shoot scan spell into the room to see deeper.
 
-Sven: Take cover, something dangerous is coming!!
+No response
+
+He opened the backpack and pick a notebook
+
+Sven: Belongings of Peter Zhang of Neo-Carcosa University, Department of Mesh Biology
+
+Clara: !!!
+
+Sven: You know him?
+
+Clara: He is my ex-boyfriend who went missing 3 years ago during his research of necromancer bee
+
+Clara: We made report to Hunter but due to the shifting nature of this mesh they stopped their search immediately.
+
+Clara: How this thing can be here?
+
+Sven: Sometimes strong mesh can pull up things that have strong attachment with you.
+
+Clara: Does this mean he is out there? in his mesh?
+
+Sven: Who knows. Let's set up the device before the bats coming.
+
+They set up the sensors then wait in the room, waiting for the bladewing to pass through them.
+
+*change BG to something else*
+
+Clara: ....
+
+Sven: Looking for your Ex ?
+
+Clara: It's....It's none of your business.
+
+Sven: It's dangerous here and keeping you safe is my business.
+
+Sven: You should return to camp
+
+Clara: HE IS OUT THERE !!!, I knew it 
+
+Sven: Calm down, you might attract dangers
+
+*noises 3 cyberhound appeared*
+
+Sven: Get back
+
+//combat
+
+Sven: There's someone else here. This type of cyberhound is relatively recent model.
+
+Sven: We need to get back to Wang
+
+*change bg to camp*
+
+Sven: Wake up!!! We're in danger.
