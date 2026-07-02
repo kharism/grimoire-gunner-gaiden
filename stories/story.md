@@ -196,9 +196,19 @@ Sven: Do you have any self defense training? Firearm? Grimoire weaponries?
 
 Wang: No.
 
-Sven: at least bring a long stick for self defense against wild magical creature inside the mesh.
+Sven: Do you have any personal attachment to that mesh zone?
 
-Sven: Anything you want to ask?
+Clara: Ummm. I'm not sure what you mean...
+
+Sven: Does the zone trigger something inside your head, like someone mugged you in that zone.
+
+Wang: It's our first time diving in the area, right?
+
+Clara: Yes.
+
+Sven: ....,
+
+Sven: Alright, Anything you want to ask?
 
 *Wang and clara shook their head*
 
@@ -279,7 +289,7 @@ Sven: In the past, people used this mesh as jumping point to aerial fishery plan
 
 Sven: but since we found safer route, it is mostly abandoned.
 
-Sven: Just a bit more we can set up camp to observe the migration of bladewing bats.
+Sven: Just a bit more we can set sensors to record and observe the migration of bladewing bats.
 
 They reached an open area inside the plant.
 
