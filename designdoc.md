@@ -73,5 +73,22 @@ Use these presets in LMMS
 
 - add proper hit detection
 
+- add meter that allows for powerup
+
+- The powerup will have cost and paid using orb
+
+- Player get orb each time the meter is full or a wave is cleared
+
+- the menus for now are: 
+  * GrimoireGun
+    * DamagePlus  2x
+    * RateUp      2x
+  * Suit
+    * Heal        2x
+    * Infiltrate  1x
+  * GigaAtk
+    * DamageAll   4x
+
+
 
 ## Exploration

@@ -283,7 +283,7 @@ Sven: Just a bit more we can set up camp to observe the migration of bladewing b
 
 They reached an open area inside the plant.
 
-Sven: Alright, I cant sense any possible anomaly in near future here. We can observe bladewing bats from the open field here, and set camp inside one of the room there.
+Sven: Alright, I cant sense any potential anomaly in near future here. We can set our sensors on the open field here, and set camp inside one of the room there.
 
 They Opened one of the room and see some leftover from previous occupant of the room
 
@@ -299,7 +299,7 @@ Clara: !!!
 
 Sven: You know him?
 
-Clara: He is my ex-boyfriend who went missing 3 years ago during his research of necromancer bee
+Clara: He is my ex-boyfriend who went missing 2 Months ago during his research of necromancer bee
 
 Clara: We made report to Hunter but due to the shifting nature of this mesh they stopped their search immediately.
 
@@ -325,20 +325,64 @@ Sven: It's dangerous here and keeping you safe is my business.
 
 Sven: You should return to camp
 
-Clara: HE IS OUT THERE !!!, I knew it 
+Clara: HE IS OUT THERE !!!, I knew it
 
-Sven: Calm down, you might attract dangers
+Clara: What do you know about loosing someone you love?
+
+Sven: I know. I know loosing someone you love as much as you do.
+
+Sven: He wouldn't be happy if he knew you endanger yourself to find him.
+
+Clara: ....
+
+Sven: So calm down, you might attract dangers
 
 *noises 3 cyberhound appeared*
 
-Sven: Get back
+Sven: Enemies!!
 
-//combat
+Sven: Get behind me!!
 
-Sven: There's someone else here. This type of cyberhound is relatively recent model.
+// combat 1
+// 3 cyberse hound
 
-Sven: We need to get back to Wang
+
+### ACT 3
+Sven: There's someone else here. 
+
+Sven: This type of cyberhound is typically used by criminals.
+
+Sven: We need to get back to Wang!!!
 
 *change bg to camp*
 
-Sven: Wake up!!! We're in danger.
+Sven: Wake up Wang!!! We're in danger.
+
+Wang: *Wake up*huh? What happened?
+
+Sven: Criminal gangs, they released cyberhound here as guard or scout.
+
+Sven: Things might get ugly soon. We need to move.
+
+*bg change*
+
+Sven: incoming enemy!!
+
+// combat 2
+// cyber hound+tank
+
+Thug 1: Well, well. What do we have here ??
+
+Sven: !!!
+
+Thug 1: Another academics wandered into my body disposal task
+
+Clara:!!!!
+
+Sven: So there are another one huh??
+
+Thug 1: You'll find out soon. Get them!!
+
+// combat 3
+// with some thugs
+
