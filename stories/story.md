@@ -172,19 +172,37 @@ Sven: *Thank God*. Something happened?
 
 Rose: We have new clients for you.
 
-The man extended his hand
+The man Looked at Sven from top to bottom.
 
-Wang: Nice to meet you, Mr. Sven. My name is Wang, And hers is Clara. And we are researchers from University of Neo-Carcosa. 
+Wang: Miss manager, you didn't make any mistake right?
 
-Sven: Anything I can help?
+Wang: There is no way someone used that old beaten up suit can help us.
 
-Wang: We would like to do study on the bladewing bats migration in the mesh of abandoned Marduk Asylum.
+Wang: We better allocate our budget for our equipment
 
-Wang: And for safety concern we would like you as our guide
+Rose: I can assure you he is one of our best stalker
+
+Sven: And shouldn't my record of cleared missions despite the beaten up suit is a sign I have enough experience to get the job done?
+
+Wang: ...
+
+Clara: Calm down Wang! If the guild can vouch for his skill then so be it.
+
+Clara: I'm Sorry for his words. I hope we don't offend you.
+
+Sven: Don't worry, Happened often so I remembered my retort
+
+Sven: Let's continue with the mission.
+
+Clara: We would like to do study on the bladewing bats migration in the mesh of abandoned Marduk Asylum.
+
+Clara: And for safety concern we would like you as our guide
 
 Sven: For how long ?
 
 Clara: Just 2 days.
+
+>> begin multipla options
 
 Sven: You two have mesh diving experience before?
 
