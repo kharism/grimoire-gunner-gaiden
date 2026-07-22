@@ -14,6 +14,10 @@ import (
 )
 
 var delay, _ = time.ParseDuration("200ms")
+var defaultDelay, _ = time.ParseDuration("200ms")
+
+var damage = 2
+var defaultDamage = 2
 
 var lastShoot = time.Now()
 
@@ -28,6 +32,13 @@ type RenderableCaster interface {
 var SelectedSlot = 0
 var WeaponSlot = []RenderableCaster{}
 
+func SetDamage(dmg int) {
+	damage = dmg
+}
+func SetDelay(dur time.Duration) {
+	delay = dur
+}
+
 func PlayerAttackHandler(e *ecs.ECS) {
 	playerQuery := donburi.NewQuery(filter.Contains(
 		component.PlayerTag,
@@ -41,7 +52,9 @@ func PlayerAttackHandler(e *ecs.ECS) {
 			component.Sprite.Get(playerE).Image = assets.SvenSprite2
 			Revertbackspritetime = time.Now().Add(300 * time.Millisecond)
 
-			weapons.BasicProjectile(e, component.PositionComponentData{X: playerPos.X + float64(component.GridLength), Y: playerPos.Y, Z: playerPos.Z})
+			projectileEntity := weapons.BasicProjectile(e, component.PositionComponentData{X: playerPos.X + float64(component.GridLength), Y: playerPos.Y, Z: playerPos.Z})
+			projectileEntry := e.World.Entry(*projectileEntity)
+			component.Damage.Get(projectileEntry).Damage = damage
 		}
 	}
 	if inpututil.IsKeyJustPressed(ebiten.Key1) {

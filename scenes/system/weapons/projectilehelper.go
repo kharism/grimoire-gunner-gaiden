@@ -9,8 +9,8 @@ import (
 	"github.com/yohamta/donburi/ecs"
 )
 
-func BasicProjectile(ecs *ecs.ECS, pos component.PositionComponentData) {
-	component.NewProjectile(ecs.World, component.ProjectileParam{
+func BasicProjectile(ecs *ecs.ECS, pos component.PositionComponentData) *donburi.Entity {
+	return component.NewProjectile(ecs.World, component.ProjectileParam{
 		Vx:     20,
 		Vy:     0,
 		Pos:    pos,

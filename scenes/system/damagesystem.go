@@ -13,7 +13,7 @@ import (
 func CheckIsHit(targetPos, hazardPos component.PositionComponentData) bool {
 	return math.Abs(targetPos.X-hazardPos.X) < float64(component.GridLength) &&
 		math.Abs(targetPos.Z-hazardPos.Z) < float64(component.GridWidth) &&
-		math.Abs(targetPos.Y-hazardPos.Y) < 40
+		math.Abs(targetPos.Y-hazardPos.Y) < 10
 }
 func DamageSystemHandler(ecs *ecs.ECS) {
 	damageQuery := donburi.NewQuery(
@@ -33,7 +33,11 @@ func DamageSystemHandler(ecs *ecs.ECS) {
 	// 	health := component.Health.Get(target)
 	// 	fmt.Println(health.Name)
 	// }
+	hazards := []*donburi.Entry{}
 	for hazard := range damageQuery.Iter(ecs.World) {
+		hazards = append(hazards, hazard)
+	}
+	for _, hazard := range hazards {
 		validTargets := []*donburi.Entry{}
 		for target := range healthQuery.Iter(ecs.World) {
 			if target == hazard {
@@ -50,17 +54,21 @@ func DamageSystemHandler(ecs *ecs.ECS) {
 
 			}
 		}
+
 		for _, target := range validTargets {
 			if !ecs.World.Valid(hazard.Entity()) {
 				break
 			}
 			if ecs.World.Valid(target.Entity()) {
-				component.OnHit.GetValue(hazard)(ecs, hazard, target)
-				if component.Health.Get(target).HP <= 0 {
-					pos := component.Position.GetValue(target)
-					assets.CreateExplosion(ecs, pos)
-					ecs.World.Remove(target.Entity())
+				if hazard.HasComponent(component.OnHit) {
+					component.OnHit.GetValue(hazard)(ecs, hazard, target)
+					if component.Health.Get(target).HP <= 0 {
+						pos := component.Position.GetValue(target)
+						assets.CreateExplosion(ecs, pos)
+						ecs.World.Remove(target.Entity())
+					}
 				}
+
 			}
 		}
 	}

@@ -13,6 +13,7 @@ import (
 )
 
 var MAX_COLUMN = 3
+var DEFAULT_MAX_COLUMN = 3
 
 // check whether the zone player going to is available
 func isLegalMove(pos component.PositionComponentData, world donburi.World) bool {
