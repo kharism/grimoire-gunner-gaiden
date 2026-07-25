@@ -53,6 +53,9 @@ var grid_dmg []byte
 //go:embed "img/Powerupmenu.png"
 var powerup_menu []byte
 
+//go:embed "img/meter.png"
+var meter []byte
+
 //go:embed "img/danger.png"
 var danger []byte
 
@@ -78,6 +81,8 @@ var OptionBg *ebiten.Image
 var ArrowBg *ebiten.Image
 
 var PowerupMenu *ebiten.Image
+
+var Meter *ebiten.Image
 
 var DialogBox *ebiten.Image
 
@@ -124,6 +129,10 @@ func init() {
 	if PowerupMenu == nil {
 		imgReader := bytes.NewReader(powerup_menu)
 		PowerupMenu, _, _ = ebitenutil.NewImageFromReader(imgReader)
+	}
+	if Meter == nil {
+		imgReader := bytes.NewReader(meter)
+		Meter, _, _ = ebitenutil.NewImageFromReader(imgReader)
 	}
 	if Sven == nil {
 		imgReader := bytes.NewReader(sven)

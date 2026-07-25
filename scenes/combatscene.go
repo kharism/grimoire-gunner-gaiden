@@ -56,6 +56,7 @@ type powerupState struct {
 	peek        bool
 	menuStack   []powerupmenu
 	currentMenu powerupmenu
+	topMenu     powerupmenu
 	combatScene *CombatScene
 }
 
@@ -95,6 +96,11 @@ func (s *powerupState) Update() {
 
 		}
 	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyR) {
+		if s.currentMenu != s.topMenu {
+			s.currentMenu = s.topMenu
+		}
+	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 		menus := s.currentMenu.GetMenus()
 		j := (s.currentMenu.GetCurrentPick() + 1) % len(menus)
@@ -109,6 +115,15 @@ func (s *powerupState) Update() {
 func (s *powerupState) Close() {
 	s.hide = true
 	s.peek = false
+}
+func (s *powerupState) Open() {
+	s.combatScene.currentCombatSubState = s
+	s.currentMenu = &poweruptopmenu{}
+	// reset stuff
+	system.SetDamage(system.DefaultDamage)
+	system.SetDelay(system.DefaultDelay)
+	s.hide = false
+	s.peek = true
 }
 func (s *powerupState) Draw(screen *ebiten.Image) {
 	translate1 := ebiten.GeoM{}
@@ -131,9 +146,9 @@ func (s *powerupState) Draw(screen *ebiten.Image) {
 	text.Draw(screen, "Upgrade", assets.PixelOperatorFace, op)
 	translate1.Reset()
 	translate1.Scale(1.4, 1.4)
-	translate1.Translate(float64(s.menuPosX+40), 280)
+	translate1.Translate(float64(s.menuPosX+40), 278)
 	op.DrawImageOptions.GeoM = translate1
-	text.Draw(screen, "E to Select\nSpace to Cancel\nQ to peek", assets.PixelOperatorFace, op)
+	text.Draw(screen, "E to Select\nSpace to Cancel\nQ to peek\nR to return", assets.PixelOperatorFace, op)
 	menus := s.currentMenu.GetMenus()
 	startPosY := 88
 	for i, j := range menus {
@@ -250,12 +265,15 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	LoadGrid(s.world)
 	s.player = LoadPlayer(s.world, state)
 	s.defaultSubState = &defaultCombatState{ecs: s.ecs}
-	s.powerupSubState = &powerupState{
+
+	jj := &powerupState{
 		menuStack:   []powerupmenu{},
 		currentMenu: &poweruptopmenu{},
 		menuPosX:    -320,
 		combatScene: s,
 	}
+	jj.topMenu = jj.currentMenu.(*poweruptopmenu)
+	s.powerupSubState = jj
 	s.currentCombatSubState = s.powerupSubState
 	//LoadBlock(s.world, state, 2, 6)
 	//LoadBlock(s.world, state, 2, 7)
@@ -289,6 +307,12 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 		e := s.world.Entry(ent)
 		component.Ticker.SetValue(e, component.DummyTicker{w})
 	}
+
+	system.MeterTickerInstance.OpenCloser = s.powerupSubState.(*powerupState)
+	ent := s.world.Create(component.Ticker)
+	e := s.world.Entry(ent)
+	component.Ticker.Set(e, &component.DummyTicker{H: system.MeterTickerInstance})
+
 	system.LastTick = time.Now()
 
 	s.ecs.AddSystem(system.PlayerMovementHandler)
@@ -296,11 +320,13 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	s.ecs.AddSystem(system.PlayerAttackHandler)
 	s.ecs.AddSystem(system.DamageSystemHandler)
 	s.ecs.AddSystem(system.PositionCheckerSystem)
+	s.ecs.AddSystem(system.Meter)
 	s.ecs.AddSystem(system.Tick)
 	s.ecs.AddRenderer(LayerCharacter, system.UnifiedRenderer)
 	s.ecs.AddRenderer(LayerDebug, system.DrawDebug)
 	s.ecs.AddRenderer(LayerHP, system.DrawHP)
 	s.ecs.AddRenderer(LayerUI, system.RenderWeapon)
+	s.ecs.AddRenderer(LayerUI, system.DrawMeter)
 
 }
 func LoadPlayer(world donburi.World, state *SceneData) donburi.Entity {

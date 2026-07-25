@@ -14,10 +14,12 @@ import (
 )
 
 var delay, _ = time.ParseDuration("200ms")
-var defaultDelay, _ = time.ParseDuration("200ms")
+
+// delay between shoot with e key
+var DefaultDelay, _ = time.ParseDuration("200ms")
 
 var damage = 2
-var defaultDamage = 2
+var DefaultDamage = 2
 
 var lastShoot = time.Now()
 
@@ -35,6 +37,8 @@ var WeaponSlot = []RenderableCaster{}
 func SetDamage(dmg int) {
 	damage = dmg
 }
+
+// set delay between shoot with e key
 func SetDelay(dur time.Duration) {
 	delay = dur
 }
