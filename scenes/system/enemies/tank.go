@@ -124,6 +124,7 @@ func (c *TankTicker) Tick() {
 				Z: pos.Z,
 			})
 			component.Velocity.Get(projectile).X *= -1
+			component.Damage.Get(projectile).Damage = 30
 			component.OnHit.SetValue(projectile, weapons.ColumnHitProjectile)
 
 			for i := pos.Z - float64(component.GridWidth); i <= pos.Z+float64(component.GridWidth); i += float64(component.GridWidth) {
