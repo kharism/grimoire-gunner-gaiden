@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"github.com/kharism/GrimoireGunner2/scenes/assets"
+	"github.com/kharism/GrimoireGunner2/scenes/component"
 	"github.com/kharism/GrimoireGunner2/scenes/system"
 )
 
@@ -22,7 +23,6 @@ type powerupState struct {
 	peek        bool
 	menuStack   []powerupmenu
 	currentMenu powerupmenu
-	topMenu     powerupmenu
 	combatScene *CombatScene
 }
 
@@ -63,9 +63,12 @@ func (s *powerupState) Update() {
 		}
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyR) {
-		if s.currentMenu != s.topMenu {
-			s.currentMenu = s.topMenu
+		if len(s.menuStack) > 0 {
+			prevMenu := s.menuStack[len(s.menuStack)-1]
+			s.currentMenu = prevMenu
+			s.menuStack = s.menuStack[:len(s.menuStack)-1]
 		}
+
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 		menus := s.currentMenu.GetMenus()
@@ -165,7 +168,8 @@ func (s *poweruptopmenu) SelectMenu(i int, substate *powerupState) powerupmenu {
 		substate.menuStack = append(substate.menuStack, s)
 		substate.currentMenu = &grimoiregunMenu{}
 	case 1:
-
+		substate.menuStack = append(substate.menuStack, s)
+		substate.currentMenu = &suitMenu{}
 	}
 	return nil
 }
@@ -196,6 +200,45 @@ func (g *grimoiregunMenu) SelectMenu(i int, s *powerupState) powerupmenu {
 		pp, _ := time.ParseDuration("100ms")
 		system.SetDelay(pp)
 		s.Close()
+		return nil
+	}
+
+	return nil
+}
+
+type suitMenu struct {
+	selectedMenu int
+}
+
+func (g *suitMenu) GetMenus() []string {
+
+	return []string{
+		"Heal",
+		"Infiltrate",
+	}
+}
+func (g *suitMenu) GetCurrentPick() int {
+	return g.selectedMenu
+}
+func (g *suitMenu) SetCurrentPick(i int) {
+	g.selectedMenu = i
+}
+func (g *suitMenu) SelectMenu(i int, s *powerupState) powerupmenu {
+	switch i {
+	case 0:
+		entry := s.combatScene.ecs.World.Entry(s.combatScene.player)
+		component.Health.Get(entry).HP += 10
+		s.Close()
+		return nil
+	case 1:
+		if system.MAX_COLUMN == 3 {
+			system.MAX_COLUMN = 5
+			s.Close()
+		} else if system.MAX_COLUMN == 5 {
+			system.MAX_COLUMN = 6
+			s.Close()
+		}
+
 		return nil
 	}
 
