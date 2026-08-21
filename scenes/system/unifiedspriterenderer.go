@@ -45,6 +45,14 @@ func drawGrid(ecs *ecs.ECS, screen *ebiten.Image) {
 		translate := ebiten.GeoM{}
 		translate.Translate(-float64(bound.Dx())/2, -float64(bound.Dy()))
 		translate.Translate(pos.X, pos.Y)
+		idxX := int(pos.X) / assets.TileLength
+		if idxX <= 3 {
+			image = assets.GridBlue
+		} else if idxX > 3 && idxX <= MAX_COLUMN {
+			image = assets.GridPurple
+		} else {
+			image = assets.GridRed
+		}
 		drawOption := &ebiten.DrawImageOptions{
 			GeoM: translate,
 		}

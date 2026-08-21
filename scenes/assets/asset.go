@@ -47,6 +47,9 @@ var grid_blue []byte
 //go:embed "img/grid_red.png"
 var grid_red []byte
 
+//go:embed "img/grid_purple.png"
+var grid_purple []byte
+
 //go:embed "img/grid_dmg.png"
 var grid_dmg []byte
 
@@ -94,6 +97,7 @@ var Wang1 *ebiten.Image
 
 var GridBlue *ebiten.Image
 var GridRed *ebiten.Image
+var GridPurple *ebiten.Image
 var GridDmg *ebiten.Image
 var GridDanger *ebiten.Image
 
@@ -158,6 +162,9 @@ func init() {
 
 		imgReader = bytes.NewReader(grid_red)
 		GridRed, _, _ = ebitenutil.NewImageFromReader(imgReader)
+
+		imgReader = bytes.NewReader(grid_purple)
+		GridPurple, _, _ = ebitenutil.NewImageFromReader(imgReader)
 
 		imgReader = bytes.NewReader(grid_dmg)
 		GridDmg, _, _ = ebitenutil.NewImageFromReader(imgReader)

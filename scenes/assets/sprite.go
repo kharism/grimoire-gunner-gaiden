@@ -47,6 +47,15 @@ var cyberhound2 []byte
 //go:embed "img/sprites/cyberhound3.png"
 var cyberhound3 []byte
 
+//go:embed "img/sprites/f_agent_sprite01.png"
+var f_agent_1 []byte
+
+//go:embed "img/sprites/f_agent_sprite02.png"
+var f_agent_2 []byte
+
+//go:embed "img/sprites/f_agent_sprite03.png"
+var f_agent_3 []byte
+
 var SvenSprite1 *ebiten.Image
 var SvenSprite2 *ebiten.Image
 var SvenSprite3 *ebiten.Image
@@ -61,6 +70,10 @@ var TankAnimFrames []*ebiten.Image
 var CyberHound1 *ebiten.Image
 var CyberHound2 *ebiten.Image //warmup
 var CyberHound3 *ebiten.Image
+
+var FAgent1 *ebiten.Image
+var FAgent2 *ebiten.Image //warmup
+var FAgent3 *ebiten.Image
 
 func init() {
 	if SvenSprite1 == nil {
@@ -98,6 +111,13 @@ func init() {
 		CyberHound2, _, _ = ebitenutil.NewImageFromReader(imgReader)
 		imgReader = bytes.NewReader(cyberhound3)
 		CyberHound3, _, _ = ebitenutil.NewImageFromReader(imgReader)
+
+		imgReader = bytes.NewReader(f_agent_1)
+		FAgent1, _, _ = ebitenutil.NewImageFromReader(imgReader)
+		imgReader = bytes.NewReader(f_agent_2)
+		FAgent2, _, _ = ebitenutil.NewImageFromReader(imgReader)
+		imgReader = bytes.NewReader(f_agent_3)
+		FAgent3, _, _ = ebitenutil.NewImageFromReader(imgReader)
 
 		BombIcon = ebiten.NewImage(40, 40)
 		BombIcon.Fill(color.Black)
