@@ -78,9 +78,9 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 		menuPosX:    -320,
 		combatScene: s,
 	}
-	jj.topMenu = jj.currentMenu.(*poweruptopmenu)
 	s.powerupSubState = jj
 	s.currentCombatSubState = s.powerupSubState
+	system.MAX_COLUMN = system.DEFAULT_MAX_COLUMN
 	//LoadBlock(s.world, state, 2, 6)
 	//LoadBlock(s.world, state, 2, 7)
 
@@ -105,7 +105,7 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	enemies.GridWidth = gridWidth
 	enemies.StartX = startX
 	enemies.StartY = startY
-	enemies.LoadTank(s.ecs, 2, 5)
+	enemies.LoadFAgent(s.ecs, 2, 5)
 
 	system.WeaponSlot = state.Weapons
 	for _, w := range state.Weapons {
