@@ -17,6 +17,16 @@
 
 Ensure to have ogg as default audio format
 
+### Assigned song
+
+- OP/title : Jazz3.mmpz
+
+- HQ : TBD
+
+
+
+### Presets
+
 Use these presets in LMMS
 
 - Okt-String 2
