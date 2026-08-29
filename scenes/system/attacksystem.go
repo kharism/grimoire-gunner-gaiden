@@ -48,10 +48,13 @@ func PlayerAttackHandler(e *ecs.ECS) {
 		component.PlayerTag,
 	))
 	if ebiten.IsKeyPressed(ebiten.KeyE) {
+		playerE, _ := playerQuery.FirstEntity(e.World)
+		component.State.SetValue(playerE, component.STATE_ATTACK)
 		if time.Since(lastShoot) >= delay {
+
 			lastShoot = time.Now()
 			//shoot
-			playerE, _ := playerQuery.FirstEntity(e.World)
+
 			playerPos := component.Position.GetValue(playerE)
 			component.Sprite.Get(playerE).Image = assets.SvenSprite2
 			Revertbackspritetime = time.Now().Add(300 * time.Millisecond)
@@ -71,15 +74,17 @@ func PlayerAttackHandler(e *ecs.ECS) {
 		playerE, _ := playerQuery.FirstEntity(e.World)
 		component.Sprite.Get(playerE).Image = assets.SvenSprite2
 		Revertbackspritetime = time.Now().Add(300 * time.Millisecond)
+		component.State.SetValue(playerE, component.STATE_ATTACK)
 		if WeaponSlot[SelectedSlot].GetCooldownProgress() == 1.0 {
 			WeaponSlot[SelectedSlot].Cast(e)
 		}
 
 	}
 	if time.Now().After(Revertbackspritetime) {
+		//component.State.SetValue(playerE, component.STATE_ATTACK)
 		playerE, ok := playerQuery.FirstEntity(e.World)
 		if ok {
-			component.Sprite.Get(playerE).Image = assets.SvenSprite1
+			component.State.SetValue(playerE, component.STATE_STANDING)
 		}
 
 	}

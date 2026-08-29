@@ -142,6 +142,8 @@ func LoadPlayer(world donburi.World, state *SceneData) donburi.Entity {
 		component.Sprite,
 		component.PlayerTag,
 		component.Velocity,
+		component.Ticker,
+		component.State,
 	)
 	playerEntry := world.Entry(playerEntity)
 	component.Health.Set(playerEntry, &component.HealthData{
@@ -149,6 +151,17 @@ func LoadPlayer(world donburi.World, state *SceneData) donburi.Entity {
 		Name:  "Player",
 		MaxHP: 100,
 	})
+	component.State.SetValue(playerEntry, component.STATE_STANDING)
+	playerSpriteTicker := component.SpriteTicker{
+		Entry: playerEntry,
+		Sprites: []*ebiten.Image{
+			assets.SvenSprite1, assets.SvenSprite4,
+		},
+		TimeTick: 9,
+		Active:   true,
+		World:    world,
+	}
+	component.Ticker.Set(playerEntry, &component.DummyTicker{&playerSpriteTicker})
 	component.Sprite.Set(playerEntry, &component.SpriteData{
 		Image: assets.SvenSprite1,
 	})
