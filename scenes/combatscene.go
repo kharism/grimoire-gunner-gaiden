@@ -1,6 +1,7 @@
 package scene
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -9,6 +10,7 @@ import (
 	"github.com/kharism/GrimoireGunner2/scenes/component"
 	"github.com/kharism/GrimoireGunner2/scenes/system"
 	"github.com/kharism/GrimoireGunner2/scenes/system/enemies"
+	"github.com/kharism/hanashi/core"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/ecs"
 )
@@ -26,6 +28,7 @@ type CombatScene struct {
 	currentCombatSubState combatSceneSubstate
 	defaultSubState       combatSceneSubstate
 	powerupSubState       combatSceneSubstate
+	hanashisubstate       combatSceneSubstate
 }
 type combatSceneSubstate interface {
 	Update()
@@ -54,6 +57,23 @@ func (c *CombatScene) Update() error {
 	//c.ecs.Update()
 	return nil
 }
+
+type HanashiSubscene struct {
+	scene *core.Scene
+	State *SceneData
+}
+
+func (m *HanashiSubscene) Update() {
+	e := m.scene.Update()
+	if e != nil {
+		fmt.Println(e.Error())
+		return
+	}
+}
+func (m *HanashiSubscene) Draw(screen *ebiten.Image) {
+	m.scene.Draw(screen)
+}
+
 func (c *CombatScene) Draw(screen *ebiten.Image) {
 	screen.Clear()
 	c.ecs.DrawLayer(LayerCharacter, screen)
@@ -81,6 +101,18 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	s.powerupSubState = jj
 	s.currentCombatSubState = s.powerupSubState
 	system.MAX_COLUMN = system.DEFAULT_MAX_COLUMN
+	if state.PreBattleTalks != nil {
+		state.PreBattleTalks.Done = func() {
+			s.currentCombatSubState = s.powerupSubState
+		}
+
+		s.hanashisubstate = &HanashiSubscene{
+			scene: state.PreBattleTalks,
+		}
+
+		s.currentCombatSubState = s.hanashisubstate
+	}
+
 	//LoadBlock(s.world, state, 2, 6)
 	//LoadBlock(s.world, state, 2, 7)
 
@@ -135,6 +167,7 @@ func (s *CombatScene) Load(state *SceneData, manager stagehand.SceneController[*
 	s.ecs.AddRenderer(LayerUI, system.DrawMeter)
 
 }
+
 func LoadPlayer(world donburi.World, state *SceneData) donburi.Entity {
 	playerEntity := world.Create(
 		component.Health,

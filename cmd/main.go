@@ -67,6 +67,10 @@ func main() {
 
 	combatScene := &scene.CombatScene{}
 
+	tutorialScene := scene.SceneTutorial(&Game{})
+
+	state.PreBattleTalks = tutorialScene
+
 	ruleSet := map[stagehand.Scene[*scene.SceneData]][]stagehand.Directive[*scene.SceneData]{
 		scene.MainMenuInstance: {
 			stagehand.Directive[*scene.SceneData]{Dest: scene.OptionSceneInstance, Trigger: scene.TriggerToOption},

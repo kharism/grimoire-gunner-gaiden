@@ -5,6 +5,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/kharism/GrimoireGunner2/scenes/system"
+	"github.com/kharism/hanashi/core"
 	"github.com/yohamta/donburi"
 )
 
@@ -18,6 +19,8 @@ type SceneData struct {
 	PlayerCol      int
 	World          donburi.World
 	HanashiChoices map[string]any
+
+	PreBattleTalks *core.Scene
 
 	Weapons []system.RenderableCaster
 

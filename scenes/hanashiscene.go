@@ -38,6 +38,7 @@ func NewHanashiScene(hanashiScene *core.Scene) *HanashiScene {
 }
 func (m *HanashiScene) Draw(screen *ebiten.Image) {
 	m.scene.Draw(screen)
+
 	// m.SkipButton.Draw(screen)
 	// txt := "click to continue"
 	// txtOpt := text.DrawOptions{}
